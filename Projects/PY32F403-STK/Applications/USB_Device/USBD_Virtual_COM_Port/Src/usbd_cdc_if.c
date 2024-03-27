@@ -6,7 +6,7 @@
 #define CDC_OUT_EP 0x02
 #define CDC_INT_EP 0x83
 
-#define USBD_VID           0xFFFF
+#define USBD_VID           0x36b7
 #define USBD_PID           0xFFFF
 #define USBD_MAX_POWER     100
 #define USBD_LANGID_STRING 1033
@@ -19,8 +19,8 @@ uint8_t dma_out_ep_idx = CDC_OUT_EP;
 
 /*!< global descriptor */
 static const uint8_t cdc_descriptor[] = {
-    USB_DEVICE_DESCRIPTOR_INIT(USB_2_0, 0xEF, 0x02, 0x01, USBD_VID, USBD_PID, 0x0100, 0x01),
-    USB_CONFIG_DESCRIPTOR_INIT(USB_CONFIG_SIZE, 0x02, 0x01, USB_CONFIG_BUS_POWERED, USBD_MAX_POWER),
+    USB_DEVICE_DESCRIPTOR_INIT(USB_2_0, 0x02, 0x02, 0x01, USBD_VID, USBD_PID, 0x0100, 0x01),
+    USB_CONFIG_DESCRIPTOR_INIT(USB_CONFIG_SIZE, 0x02, 0x01, USB_CONFIG_SELF_POWERED, USBD_MAX_POWER),
     CDC_ACM_DESCRIPTOR_INIT(0x00, CDC_INT_EP, CDC_OUT_EP, CDC_IN_EP, 0x02),
     ///////////////////////////////////////
     /// string0 descriptor
@@ -156,8 +156,9 @@ void usbd_cdc_acm_set_dtr(uint8_t intf, bool dtr)
 
 void cdc_acm_data_send_with_dtr_test(void)
 {
+    static uint8_t i = 0;
     if (dtr_enable) {
-        memset(&write_buffer[10], 'a', 118);
+        memset(write_buffer, i++, 128);
         ep_tx_busy_flag = true;
         usbd_ep_start_write(CDC_IN_EP, write_buffer, 128);
         while (ep_tx_busy_flag) {

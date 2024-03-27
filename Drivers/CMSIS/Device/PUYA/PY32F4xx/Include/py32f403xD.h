@@ -7,35 +7,27 @@
 * @version v1.0.0
 *
 ******************************************************************************
-* @attention
-*
-*		COPYRIGHT(c) 2021, Puya Semiconductor Inc.
-*
-*		All rights reserved.
-*
-*		Redistribution and use in source and binary forms, with or without modification,
-*	are permitted provided that the following conditions are met:
-*
-*   1. Redistributions of source code must retain the above copyright notice,
-*      this list of conditions and the following disclaimer.
-*   2. Redistributions in binary form must reproduce the above copyright notice,
-*      this list of conditions and the following disclaimer in the documentation
-*      and/or other materials provided with the distribution.
-*   3. Neither the name of the copyright holder nor the names of its contributors
-*      may be used to endorse or promote products derived from this software
-*      without specific prior written permission.
-*
-* 	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
 ******************************************************************************
 */
 
@@ -307,26 +299,6 @@ typedef struct
     __IO uint32_t SR;          /*!< CTC desc SR,   Address offset: 0x08 */
     __IO uint32_t INTC;        /*!< CTC desc INTC, Address offset: 0x0C */
 }CTC_TypeDef;
-
-/**
-* @brief DAC Registers
-*/
-typedef struct
-{
-    __IO uint32_t CR;          /*!< DAC desc CR,      Address offset: 0x00 */
-    __IO uint32_t SWTRIGR;     /*!< DAC desc SWTRIGR, Address offset: 0x04 */
-    __IO uint32_t DHR12R1;     /*!< DAC desc DHR12R1, Address offset: 0x08 */
-    __IO uint32_t DHR12L1;     /*!< DAC desc DHR12L1, Address offset: 0x0C */
-    __IO uint32_t DHR8R1;      /*!< DAC desc DHR8R1,  Address offset: 0x10 */
-    __IO uint32_t DHR12R2;     /*!< DAC desc DHR12R2, Address offset: 0x14 */
-    __IO uint32_t DHR12L2;     /*!< DAC desc DHR12L2, Address offset: 0x18 */
-    __IO uint32_t DHR8R2;      /*!< DAC desc DHR8R2,  Address offset: 0x1C */
-    __IO uint32_t DHR12RD;     /*!< DAC desc DHR12RD, Address offset: 0x20 */
-    __IO uint32_t DHR12LD;     /*!< DAC desc DHR12LD, Address offset: 0x24 */
-    __IO uint32_t DHR8RD;      /*!< DAC desc DHR8RD,  Address offset: 0x28 */
-    __IO uint32_t DOR1;        /*!< DAC desc DOR1,    Address offset: 0x2C */
-    __IO uint32_t DOR2;        /*!< DAC desc DOR2,    Address offset: 0x30 */
-}DAC_TypeDef;
 
 /**
 * @brief DBGMCU Registers
@@ -651,7 +623,6 @@ typedef struct
 #define CANFD_BASE                             (0x40008000UL)
 #define CRC_BASE                               (0x40023000UL)
 #define CTC_BASE                               (0x4000C800UL)
-#define DAC1_BASE                              (0x40007400UL)
 #define DBGMCU_BASE                            (0xE0042000UL)
 #define DMA1_BASE                              (AHB1PERIPH_BASE + 0x00000000UL)
 #define DMA1_Channel1_BASE                     (AHB1PERIPH_BASE + 0x00000008UL)
@@ -716,7 +687,6 @@ typedef struct
 #define CANFD                                  ((CANFD_TypeDef *) CANFD_BASE)
 #define CRC                                    ((CRC_TypeDef *) CRC_BASE)
 #define CTC                                    ((CTC_TypeDef *) CTC_BASE)
-#define DAC1                                   ((DAC_TypeDef *) DAC1_BASE)
 #define DBGMCU                                 ((DBGMCU_TypeDef *) DBGMCU_BASE)
 #define DMA1                                   ((DMA_TypeDef *)DMA1_BASE)
 #define DMA2                                   ((DMA_TypeDef *)DMA2_BASE)
@@ -2400,147 +2370,6 @@ typedef struct
 #define CTC_INTC_EREFIC_Pos                       (3U)
 #define CTC_INTC_EREFIC_Msk                       (0x1UL << CTC_INTC_EREFIC_Pos)                    /*!< 0x00000008 */
 #define CTC_INTC_EREFIC                           CTC_INTC_EREFIC_Msk                               /*!< desc EREFIC */
-
-/*********************  Bits Define For Peripheral DAC  *********************/
-/*!< DAC_CR */
-#define DAC_CR_EN1_Pos                            (0U)
-#define DAC_CR_EN1_Msk                            (0x1UL << DAC_CR_EN1_Pos)                         /*!< 0x00000001 */
-#define DAC_CR_EN1                                DAC_CR_EN1_Msk                                    /*!< desc EN1 */
-#define DAC_CR_BOFF1_Pos                          (1U)
-#define DAC_CR_BOFF1_Msk                          (0x1UL << DAC_CR_BOFF1_Pos)                       /*!< 0x00000002 */
-#define DAC_CR_BOFF1                              DAC_CR_BOFF1_Msk                                  /*!< desc BOFF1 */
-#define DAC_CR_TEN1_Pos                           (2U)
-#define DAC_CR_TEN1_Msk                           (0x1UL << DAC_CR_TEN1_Pos)                        /*!< 0x00000004 */
-#define DAC_CR_TEN1                               DAC_CR_TEN1_Msk                                   /*!< desc TEN1 */
-#define DAC_CR_TSEL1_Pos                          (3U)
-#define DAC_CR_TSEL1_Msk                          (0x7UL << DAC_CR_TSEL1_Pos)                       /*!< 0x00000038 */
-#define DAC_CR_TSEL1                              DAC_CR_TSEL1_Msk                                  /*!< TSEL1[5:3] bits (desc TSEL1) */
-#define DAC_CR_TSEL1_0                            (0x1UL << DAC_CR_TSEL1_Pos)                       /*!< 0x00000008 */
-#define DAC_CR_TSEL1_1                            (0x2UL << DAC_CR_TSEL1_Pos)                       /*!< 0x00000010 */
-#define DAC_CR_TSEL1_2                            (0x4UL << DAC_CR_TSEL1_Pos)                       /*!< 0x00000020 */
-
-#define DAC_CR_WAVE1_Pos                          (6U)
-#define DAC_CR_WAVE1_Msk                          (0x3UL << DAC_CR_WAVE1_Pos)                       /*!< 0x000000C0 */
-#define DAC_CR_WAVE1                              DAC_CR_WAVE1_Msk                                  /*!< WAVE1[7:6] bits (desc WAVE1) */
-#define DAC_CR_WAVE1_0                            (0x1UL << DAC_CR_WAVE1_Pos)                       /*!< 0x00000040 */
-#define DAC_CR_WAVE1_1                            (0x2UL << DAC_CR_WAVE1_Pos)                       /*!< 0x00000080 */
-
-#define DAC_CR_MAMP1_Pos                          (8U)
-#define DAC_CR_MAMP1_Msk                          (0xFUL << DAC_CR_MAMP1_Pos)                       /*!< 0x00000F00 */
-#define DAC_CR_MAMP1                              DAC_CR_MAMP1_Msk                                  /*!< MAMP1[11:8] bits (desc MAMP1) */
-#define DAC_CR_MAMP1_0                            (0x1UL << DAC_CR_MAMP1_Pos)                       /*!< 0x00000100 */
-#define DAC_CR_MAMP1_1                            (0x2UL << DAC_CR_MAMP1_Pos)                       /*!< 0x00000200 */
-#define DAC_CR_MAMP1_2                            (0x4UL << DAC_CR_MAMP1_Pos)                       /*!< 0x00000400 */
-#define DAC_CR_MAMP1_3                            (0x8UL << DAC_CR_MAMP1_Pos)                       /*!< 0x00000800 */
-
-#define DAC_CR_DMAEN1_Pos                         (12U)
-#define DAC_CR_DMAEN1_Msk                         (0x1UL << DAC_CR_DMAEN1_Pos)                      /*!< 0x00001000 */
-#define DAC_CR_DMAEN1                             DAC_CR_DMAEN1_Msk                                 /*!< desc DMAEN1 */
-#define DAC_CR_EN2_Pos                            (16U)
-#define DAC_CR_EN2_Msk                            (0x1UL << DAC_CR_EN2_Pos)                         /*!< 0x00010000 */
-#define DAC_CR_EN2                                DAC_CR_EN2_Msk                                    /*!< desc EN2 */
-#define DAC_CR_BOFF2_Pos                          (17U)
-#define DAC_CR_BOFF2_Msk                          (0x1UL << DAC_CR_BOFF2_Pos)                       /*!< 0x00020000 */
-#define DAC_CR_BOFF2                              DAC_CR_BOFF2_Msk                                  /*!< desc BOFF2 */
-#define DAC_CR_TEN2_Pos                           (18U)
-#define DAC_CR_TEN2_Msk                           (0x1UL << DAC_CR_TEN2_Pos)                        /*!< 0x00040000 */
-#define DAC_CR_TEN2                               DAC_CR_TEN2_Msk                                   /*!< desc TEN2 */
-#define DAC_CR_TSEL2_Pos                          (19U)
-#define DAC_CR_TSEL2_Msk                          (0x7UL << DAC_CR_TSEL2_Pos)                       /*!< 0x00380000 */
-#define DAC_CR_TSEL2                              DAC_CR_TSEL2_Msk                                  /*!< TSEL2[21:19] bits (desc TSEL2) */
-#define DAC_CR_TSEL2_0                            (0x1UL << DAC_CR_TSEL2_Pos)                       /*!< 0x00080000 */
-#define DAC_CR_TSEL2_1                            (0x2UL << DAC_CR_TSEL2_Pos)                       /*!< 0x00100000 */
-#define DAC_CR_TSEL2_2                            (0x4UL << DAC_CR_TSEL2_Pos)                       /*!< 0x00200000 */
-
-#define DAC_CR_WAVE2_Pos                          (22U)
-#define DAC_CR_WAVE2_Msk                          (0x3UL << DAC_CR_WAVE2_Pos)                       /*!< 0x00C00000 */
-#define DAC_CR_WAVE2                              DAC_CR_WAVE2_Msk                                  /*!< WAVE2[23:22] bits (desc WAVE2) */
-#define DAC_CR_WAVE2_0                            (0x1UL << DAC_CR_WAVE2_Pos)                       /*!< 0x00400000 */
-#define DAC_CR_WAVE2_1                            (0x2UL << DAC_CR_WAVE2_Pos)                       /*!< 0x00800000 */
-
-#define DAC_CR_MAMP2_Pos                          (24U)
-#define DAC_CR_MAMP2_Msk                          (0xFUL << DAC_CR_MAMP2_Pos)                       /*!< 0x0F000000 */
-#define DAC_CR_MAMP2                              DAC_CR_MAMP2_Msk                                  /*!< MAMP2[27:24] bits (desc MAMP2) */
-#define DAC_CR_MAMP2_0                            (0x1UL << DAC_CR_MAMP2_Pos)                       /*!< 0x01000000 */
-#define DAC_CR_MAMP2_1                            (0x2UL << DAC_CR_MAMP2_Pos)                       /*!< 0x02000000 */
-#define DAC_CR_MAMP2_2                            (0x4UL << DAC_CR_MAMP2_Pos)                       /*!< 0x04000000 */
-#define DAC_CR_MAMP2_3                            (0x8UL << DAC_CR_MAMP2_Pos)                       /*!< 0x08000000 */
-
-#define DAC_CR_DMAEN2_Pos                         (28U)
-#define DAC_CR_DMAEN2_Msk                         (0x1UL << DAC_CR_DMAEN2_Pos)                      /*!< 0x10000000 */
-#define DAC_CR_DMAEN2                             DAC_CR_DMAEN2_Msk                                 /*!< desc DMAEN2 */
-
-/*!< DAC_SWTRIGR */
-#define DAC_SWTRIGR_SWTRIG1_Pos                   (0U)
-#define DAC_SWTRIGR_SWTRIG1_Msk                   (0x1UL << DAC_SWTRIGR_SWTRIG1_Pos)                /*!< 0x00000001 */
-#define DAC_SWTRIGR_SWTRIG1                       DAC_SWTRIGR_SWTRIG1_Msk                           /*!< desc SWTRIG1 */
-#define DAC_SWTRIGR_SWTRIG2_Pos                   (1U)
-#define DAC_SWTRIGR_SWTRIG2_Msk                   (0x1UL << DAC_SWTRIGR_SWTRIG2_Pos)                /*!< 0x00000002 */
-#define DAC_SWTRIGR_SWTRIG2                       DAC_SWTRIGR_SWTRIG2_Msk                           /*!< desc SWTRIG2 */
-
-/*!< DAC_DHR12R1 */
-#define DAC_DHR12R1_DACC1DHR_Pos                  (0U)
-#define DAC_DHR12R1_DACC1DHR_Msk                  (0xFFFUL << DAC_DHR12R1_DACC1DHR_Pos)             /*!< 0x00000FFF */
-#define DAC_DHR12R1_DACC1DHR                      DAC_DHR12R1_DACC1DHR_Msk                          /*!< DACC1DHR[11:0] bits (desc DACC1DHR) */
-
-/*!< DAC_DHR12L1 */
-#define DAC_DHR12L1_DACC1DHR_Pos                  (3U)
-#define DAC_DHR12L1_DACC1DHR_Msk                  (0xFFFUL << DAC_DHR12L1_DACC1DHR_Pos)             /*!< 0x00007FF8 */
-#define DAC_DHR12L1_DACC1DHR                      DAC_DHR12L1_DACC1DHR_Msk                          /*!< DACC1DHR[14:3] bits (desc DACC1DHR) */
-
-/*!< DAC_DHR8R1 */
-#define DAC_DHR8R1_DACC1DHR_Pos                   (0U)
-#define DAC_DHR8R1_DACC1DHR_Msk                   (0xFFUL << DAC_DHR8R1_DACC1DHR_Pos)               /*!< 0x000000FF */
-#define DAC_DHR8R1_DACC1DHR                       DAC_DHR8R1_DACC1DHR_Msk                           /*!< DACC1DHR[7:0] bits (desc DACC1DHR) */
-
-/*!< DAC_DHR12R2 */
-#define DAC_DHR12R2_DACC2DHR_Pos                  (0U)
-#define DAC_DHR12R2_DACC2DHR_Msk                  (0xFFFUL << DAC_DHR12R2_DACC2DHR_Pos)             /*!< 0x00000FFF */
-#define DAC_DHR12R2_DACC2DHR                      DAC_DHR12R2_DACC2DHR_Msk                          /*!< DACC2DHR[11:0] bits (desc DACC2DHR) */
-
-/*!< DAC_DHR12L2 */
-#define DAC_DHR12L2_DACC2DHR_Pos                  (4U)
-#define DAC_DHR12L2_DACC2DHR_Msk                  (0xFFFUL << DAC_DHR12L2_DACC2DHR_Pos)             /*!< 0x0000FFF0 */
-#define DAC_DHR12L2_DACC2DHR                      DAC_DHR12L2_DACC2DHR_Msk                          /*!< DACC2DHR[15:4] bits (desc DACC2DHR) */
-
-/*!< DAC_DHR8R2 */
-#define DAC_DHR8R2_DACC2DHR_Pos                   (0U)
-#define DAC_DHR8R2_DACC2DHR_Msk                   (0xFFUL << DAC_DHR8R2_DACC2DHR_Pos)               /*!< 0x000000FF */
-#define DAC_DHR8R2_DACC2DHR                       DAC_DHR8R2_DACC2DHR_Msk                           /*!< DACC2DHR[7:0] bits (desc DACC2DHR) */
-
-/*!< DAC_DHR12RD */
-#define DAC_DHR12RD_DACC1DHR_Pos                  (0U)
-#define DAC_DHR12RD_DACC1DHR_Msk                  (0xFFFUL << DAC_DHR12RD_DACC1DHR_Pos)             /*!< 0x00000FFF */
-#define DAC_DHR12RD_DACC1DHR                      DAC_DHR12RD_DACC1DHR_Msk                          /*!< DACC1DHR[11:0] bits (desc DACC1DHR) */
-#define DAC_DHR12RD_DACC2DHR_Pos                  (16U)
-#define DAC_DHR12RD_DACC2DHR_Msk                  (0xFFFUL << DAC_DHR12RD_DACC2DHR_Pos)             /*!< 0x0FFF0000 */
-#define DAC_DHR12RD_DACC2DHR                      DAC_DHR12RD_DACC2DHR_Msk                          /*!< DACC2DHR[27:16] bits (desc DACC2DHR) */
-
-/*!< DAC_DHR12LD */
-#define DAC_DHR12LD_DACC1DHR_Pos                  (4U)
-#define DAC_DHR12LD_DACC1DHR_Msk                  (0xFFFUL << DAC_DHR12LD_DACC1DHR_Pos)             /*!< 0x0000FFF0 */
-#define DAC_DHR12LD_DACC1DHR                      DAC_DHR12LD_DACC1DHR_Msk                          /*!< DACC1DHR[15:4] bits (desc DACC1DHR) */
-#define DAC_DHR12LD_DACC2DHR_Pos                  (20U)
-#define DAC_DHR12LD_DACC2DHR_Msk                  (0xFFFUL << DAC_DHR12LD_DACC2DHR_Pos)             /*!< 0xFFF00000 */
-#define DAC_DHR12LD_DACC2DHR                      DAC_DHR12LD_DACC2DHR_Msk                          /*!< DACC2DHR[31:20] bits (desc DACC2DHR) */
-
-/*!< DAC_DHR8RD */
-#define DAC_DHR8RD_DACC1DHR_Pos                   (0U)
-#define DAC_DHR8RD_DACC1DHR_Msk                   (0xFFUL << DAC_DHR8RD_DACC1DHR_Pos)               /*!< 0x000000FF */
-#define DAC_DHR8RD_DACC1DHR                       DAC_DHR8RD_DACC1DHR_Msk                           /*!< DACC1DHR[7:0] bits (desc DACC1DHR) */
-#define DAC_DHR8RD_DACC2DHR_Pos                   (8U)
-#define DAC_DHR8RD_DACC2DHR_Msk                   (0xFFUL << DAC_DHR8RD_DACC2DHR_Pos)               /*!< 0x0000FF00 */
-#define DAC_DHR8RD_DACC2DHR                       DAC_DHR8RD_DACC2DHR_Msk                           /*!< DACC2DHR[15:8] bits (desc DACC2DHR) */
-
-/*!< DAC_DOR1 */
-#define DAC_DOR1_DACC1DOR_Pos                     (0U)
-#define DAC_DOR1_DACC1DOR_Msk                     (0xFFFUL << DAC_DOR1_DACC1DOR_Pos)                /*!< 0x00000FFF */
-#define DAC_DOR1_DACC1DOR                         DAC_DOR1_DACC1DOR_Msk                             /*!< DACC1DOR[11:0] bits (desc DACC1DOR) */
-
-/*!< DAC_DOR2 */
-#define DAC_DOR2_DACC2DOR_Pos                     (0U)
-#define DAC_DOR2_DACC2DOR_Msk                     (0xFFFUL << DAC_DOR2_DACC2DOR_Pos)                /*!< 0x00000FFF */
-#define DAC_DOR2_DACC2DOR                         DAC_DOR2_DACC2DOR_Msk                             /*!< DACC2DOR[11:0] bits (desc DACC2DOR) */
 
 /*********************  Bits Define For Peripheral DBGMCU  *********************/
 /*!< DBGMCU_IDCODE */
@@ -5380,9 +5209,6 @@ unlock the write access to the option byte block */
 #define RCC_APB1RSTR_PWRRST_Pos                   (28U)
 #define RCC_APB1RSTR_PWRRST_Msk                   (0x1UL << RCC_APB1RSTR_PWRRST_Pos)                /*!< 0x10000000 */
 #define RCC_APB1RSTR_PWRRST                       RCC_APB1RSTR_PWRRST_Msk                           /*!< desc PWRRST */
-#define RCC_APB1RSTR_DACRST_Pos                   (29U)
-#define RCC_APB1RSTR_DACRST_Msk                   (0x1UL << RCC_APB1RSTR_DACRST_Pos)                /*!< 0x20000000 */
-#define RCC_APB1RSTR_DACRST                       RCC_APB1RSTR_DACRST_Msk                           /*!< desc DACRST */
 #define RCC_APB1RSTR_CTCRST_Pos                   (31U)
 #define RCC_APB1RSTR_CTCRST_Msk                   (0x1UL << RCC_APB1RSTR_CTCRST_Pos)                /*!< 0x80000000 */
 #define RCC_APB1RSTR_CTCRST                       RCC_APB1RSTR_CTCRST_Msk                           /*!< CTCRST bits (desc CTCRST) */
@@ -5512,9 +5338,6 @@ unlock the write access to the option byte block */
 #define RCC_APB1ENR_PWREN_Pos                     (28U)
 #define RCC_APB1ENR_PWREN_Msk                     (0x1UL << RCC_APB1ENR_PWREN_Pos)                  /*!< 0x10000000 */
 #define RCC_APB1ENR_PWREN                         RCC_APB1ENR_PWREN_Msk                             /*!< desc PWREN */
-#define RCC_APB1ENR_DACEN_Pos                     (29U)
-#define RCC_APB1ENR_DACEN_Msk                     (0x1UL << RCC_APB1ENR_DACEN_Pos)                  /*!< 0x20000000 */
-#define RCC_APB1ENR_DACEN                         RCC_APB1ENR_DACEN_Msk                             /*!< desc DACEN */
 #define RCC_APB1ENR_CTCEN_Pos                     (31U)
 #define RCC_APB1ENR_CTCEN_Msk                     (0x1UL << RCC_APB1ENR_CTCEN_Pos)                  /*!< 0x80000000 */
 #define RCC_APB1ENR_CTCEN                         RCC_APB1ENR_CTCEN_Msk                             /*!< desc CTCEN */
@@ -7522,9 +7345,6 @@ unlock the write access to the option byte block */
 /****************************** CRC Instances *********************************/
 #define IS_CTC_ALL_INSTANCE(INSTANCE) ((INSTANCE) == CTC)
 
-/****************************** DAC Instances *********************************/
-#define IS_DAC_ALL_INSTANCE(INSTANCE) ((INSTANCE) == DAC1)
-
 /****************************** DMA Instances *********************************/
 #define IS_DMA_ALL_INSTANCE(INSTANCE) (((INSTANCE) == DMA1_Channel1) || \
                                        ((INSTANCE) == DMA1_Channel2) || \
@@ -7977,7 +7797,6 @@ unlock the write access to the option byte block */
 #define TIM10_IRQn              TIM1_UP_TIM10_IRQn
 #define TIM1_UP_IRQn            TIM1_UP_TIM10_IRQn
 #define TIM1_UP_TIM16_IRQn      TIM1_UP_TIM10_IRQn
-#define TIM6_DAC_IRQn           TIM6_IRQn
 #define TIM12_IRQn              TIM8_BRK_TIM12_IRQn
 #define TIM8_BRK_IRQn           TIM8_BRK_TIM12_IRQn
 #define TIM14_IRQn              TIM8_TRG_COM_TIM14_IRQn
@@ -8005,7 +7824,6 @@ unlock the write access to the option byte block */
 #define TIM10_IRQHandler              TIM1_UP_TIM10_IRQHandler
 #define TIM1_UP_IRQHandler            TIM1_UP_TIM10_IRQHandler
 #define TIM1_UP_TIM16_IRQHandler      TIM1_UP_TIM10_IRQHandler
-#define TIM6_DAC_IRQHandler           TIM6_IRQHandler
 #define TIM12_IRQHandler              TIM8_BRK_TIM12_IRQHandler
 #define TIM8_BRK_IRQHandler           TIM8_BRK_TIM12_IRQHandler
 #define TIM14_IRQHandler              TIM8_TRG_COM_TIM14_IRQHandler

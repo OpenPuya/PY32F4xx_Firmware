@@ -20,11 +20,13 @@ indicates CounterMode:Up, and direction = 1 indicates CounterMode:down.
 测试用板：PY32F403_STK
 MDK版本： 5.28
 IAR版本： 9.20
+GCC版本：GNU Arm Embedded Toolchain 10.3-2021.10
 
 Test environment:
 Test board: PY32F403_STK
 MDK Version: 5.28
 IAR Version: 9.20
+GCC Version: GNU Arm Embedded Toolchain 10.3-2021.10
 ================================================================================
 使用步骤：
 1. 编译下载程序到MCU，并通过debug模式运行；

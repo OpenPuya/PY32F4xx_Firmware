@@ -138,6 +138,14 @@ int usbd_ep_start_read(const uint8_t ep, uint8_t *data, uint32_t data_len);
  */
 void usbd_event_reset_handler(void);
 /**
+ * @brief Usb resume irq callback.
+ */
+void usbd_event_resume_handler(void);
+/**
+ * @brief Usb suspend irq callback.
+ */
+void usbd_event_suspend_handler(void);
+/**
  * @brief Usb setup packet recv irq callback.
  * @param[in]  psetup  setup packet.
  */

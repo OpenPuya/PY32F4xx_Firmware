@@ -6,8 +6,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -281,8 +289,10 @@ typedef struct __DMA_HandleTypeDef
 #define DMA_CHANNEL_MAP_ADC1              0x00000000U
 #define DMA_CHANNEL_MAP_ADC2              0x00000001U
 #define DMA_CHANNEL_MAP_ADC3              0x00000002U
+#if defined(DAC1)
 #define DMA_CHANNEL_MAP_DAC1              0x00000003U
 #define DMA_CHANNEL_MAP_DAC2              0x00000004U
+#endif /* DAC1 */
 #define DMA_CHANNEL_MAP_SPI1_RD           0x00000005U
 #define DMA_CHANNEL_MAP_SPI1_WR           0x00000006U
 #define DMA_CHANNEL_MAP_SPI2_RD           0x00000007U

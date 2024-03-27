@@ -6,8 +6,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -84,10 +92,10 @@ int main(void)
     uwDirection = __HAL_TIM_IS_TIM_COUNTING_DOWN(&TimHandle);
     
     /* Print count direction 1: down, 0: up */
-    printf("Direction = 0x%x\r\n ", uwDirection);
+    printf("Direction = 0x%x\r\n ",(unsigned int)uwDirection);
     
     /* Print the current count value */
-    printf("CNT = %d\r\n",__HAL_TIM_GET_COUNTER(&TimHandle));
+    printf("CNT = %u\r\n",(unsigned int)__HAL_TIM_GET_COUNTER(&TimHandle));
   }
 }
 

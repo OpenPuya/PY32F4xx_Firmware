@@ -11,7 +11,14 @@ struct printer_cfg_priv {
     uint8_t port_status;
 } usbd_printer_cfg;
 
-uint8_t printer_id[] = "0MFG:Printer;CMD:EPSON;MDL:POS-80;CLS:PRINTER;";
+uint8_t printer_id[] = 
+{
+  0x00,
+  '0','M','F','G',':','P','r','i','n','t','e','r',';','C','M','D',':',
+  'E','P','S','O','N',';','M','D','L',':','P','O','S','-','8','0',';',
+  'C','L','S',':','P','R','I','N','T','E','R',';',
+  0x00
+};
 
 static int printer_class_interface_request_handler(struct usb_setup_packet *setup, uint8_t **data, uint32_t *len)
 {
@@ -21,9 +28,8 @@ static int printer_class_interface_request_handler(struct usb_setup_packet *setu
 
     switch (setup->bRequest) {
         case PRINTER_REQUEST_GET_DEVICE_ID:
-            **data = 0;
-            memcpy((*data + 1), printer_id, sizeof(printer_id));
-            *len = 1 + sizeof(printer_id);
+            memcpy(*data, printer_id, sizeof(printer_id));
+            *len = sizeof(printer_id);
             break;
         case PRINTER_REQUEST_GET_PORT_SATTUS:
 

@@ -24,8 +24,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -668,7 +676,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedPollForConversion(ADC_HandleTypeDef* hadc, u
   }
 
   /* Clear injected group conversion flag */
-  /* Note: On PY32F4 ADC, clear regular conversion flag raised               */
+  /* Note: On ADC, clear regular conversion flag raised               */
   /* simultaneously.                                                          */
   __HAL_ADC_CLEAR_FLAG(hadc, ADC_FLAG_JSTRT | ADC_FLAG_JEOC | ADC_FLAG_EOC);    
   
@@ -861,7 +869,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedStop_IT(ADC_HandleTypeDef* hadc)
   *          - DMA transfer complete
   *          - DMA half transfer
   *         Each of these interruptions has its dedicated callback function.
-  * @note:  On PY32F4 devices, ADC slave regular group must be configured 
+  * @note:  On devices, ADC slave regular group must be configured 
   *         with conversion trigger ADC_SOFTWARE_START.
   * @note:  ADC slave can be enabled preliminarily using single-mode  
   *         HAL_ADC_Start() function.
@@ -885,7 +893,7 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeStart_DMA(ADC_HandleTypeDef* hadc, uint32_t
   /* Set a temporary handle of the ADC slave associated to the ADC master     */
   ADC_MULTI_SLAVE(hadc, &tmphadcSlave);
   
-  /* On PY32F4 devices, ADC slave regular group must be configured with      */
+  /* On devices, ADC slave regular group must be configured with      */
   /* conversion trigger ADC_SOFTWARE_START.                                   */
   /* Note: External trigger of ADC slave must be enabled, it is already done  */
   /*       into function "HAL_ADC_Init()".                                    */
@@ -1070,7 +1078,6 @@ HAL_StatusTypeDef HAL_ADCEx_MultiModeStop_DMA(ADC_HandleTypeDef* hadc)
   *            both flags JEOC and EOS are raised.
   *         Flag JEOS must not be cleared by this function because
   *         it would not be compliant with low power features
-  *         (feature low power auto-wait, not available on all PY32 families).
   *         To clear this flag, either use function: 
   *         in programming model IT: @ref HAL_ADC_IRQHandler(), in programming
   *         model polling: @ref HAL_ADCEx_InjectedPollForConversion() 
@@ -1134,7 +1141,7 @@ uint32_t HAL_ADCEx_MultiModeGetValue(ADC_HandleTypeDef* hadc)
   /* Note: EOC flag is not cleared here by software because automatically     */
   /*       cleared by hardware when reading register DR.                      */
   
-  /* On PY32F4 devices, ADC1 data register DR contains ADC2 conversions      */
+  /* On devices, ADC1 data register DR contains ADC2 conversions      */
   /* only if ADC1 DMA mode is enabled.                                        */
   tmpDR = hadc->Instance->DR;
 
@@ -1400,7 +1407,7 @@ HAL_StatusTypeDef HAL_ADCEx_InjectedConfigChannel(ADC_HandleTypeDef* hadc, ADC_I
   if ((sConfigInjected->InjectedChannel == ADC_CHANNEL_TEMPSENSOR) ||
       (sConfigInjected->InjectedChannel == ADC_CHANNEL_VREFINT)      )
   {
-    /* For PY32F4 devices with several ADC: Only ADC1 can access internal    */
+    /* For devices with several ADC: Only ADC1 can access internal    */
     /* measurement channels (VrefInt/TempSensor). If these channels are       */
     /* intended to be set on other ADC instances, an error is reported.       */
     if (hadc->Instance == ADC1)

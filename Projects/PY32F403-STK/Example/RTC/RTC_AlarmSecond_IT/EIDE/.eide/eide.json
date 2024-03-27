@@ -1,0 +1,161 @@
+{
+  "name": "Project",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [
+    ".eide/deps"
+  ],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "BSP",
+        "files": [
+          {
+            "path": "../../../../../../Drivers/BSP/PY32F403xx_Start_Kit/py32f403xx_Start_Kit.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Common",
+        "files": [
+          {
+            "path": "../Src/system_py32f4xx.c"
+          },
+          {
+            "path": "startup_py32f403xx.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Doc",
+        "files": [
+          {
+            "path": "../readme.txt"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "PY32F4xx_HAL_Driver",
+        "files":[
+          {
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rcc.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rcc_ex.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_gpio.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_dma.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_pwr.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_pwr_ex.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_uart.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_cortex.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rtc.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rtc_ex.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "User",
+        "files":[
+          {
+            "path":"../Src/main.c"
+          },
+          {
+            "path":"../Src/py32f4xx_hal_msp.c"
+          },
+          {
+            "path":"../Src/py32f4xx_it.c"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": "PY32F403xD",
+  "packDir": "../../../../../../Pack/GCC/.pack/Puya/PY32F4xx_DFP",
+  "miscInfo": {
+    "uid": "36bcf0031e18a3008bbdaa90a96a7987"
+  },
+  "targets": {
+    "Project": {
+      "excludeList": [],
+      "toolchain": "GCC",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
+        "scatterFilePath": "py32f403xd.ld",
+        "useCustomScatterFile": true,
+        "storageLayout": {
+          "RAM": [],
+          "ROM": []
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "",
+        "target": "py32f403",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "Puya",
+            "cpuName": "PY32F403xD"
+          },
+          "proType": 1,
+          "speed": 1000,
+          "otherCmds": ""
+        },
+        "OpenOCD": {
+          "bin": "",
+          "target": "py32f403",
+          "interface": "cmsis-dap",
+          "baseAddr": "0x08000000"
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "../../../../../../Drivers/BSP/PY32F403xx_Start_Kit",
+          "../../../../../../Drivers/CMSIS/Device/PUYA/PY32F4xx/Include",
+          "../../../../../../Drivers/CMSIS/Include",
+          "../../../../../../Drivers/PY32F4xx_HAL_Driver/Inc",
+          "../Inc"
+        ],
+        "libList": [],
+        "sourceDirList": [],
+        "defineList": ["USE_HAL_DRIVER","PY32F403xD"]
+      }
+    }
+  },
+  "version": "3.3"
+}

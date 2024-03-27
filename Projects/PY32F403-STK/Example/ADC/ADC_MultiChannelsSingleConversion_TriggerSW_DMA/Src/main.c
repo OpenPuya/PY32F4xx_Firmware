@@ -6,8 +6,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -70,10 +78,10 @@ int main(void)
     
     /* Clear DMA Complete Flag */
     __HAL_DMA_CLEAR_FLAG(&HdmaCh1, DMA_IFCR_CTCIF1);       
-    printf("Channel4: %d \r\n", gADCxConvertedData[0]);
-    printf("Channel5: %d \r\n", gADCxConvertedData[1]);
-    printf("Channel6: %d \r\n", gADCxConvertedData[2]);
-    printf("Channel7: %d \r\n", gADCxConvertedData[3]);
+    printf("Channel4: %u \r\n",(unsigned int)gADCxConvertedData[0]);
+    printf("Channel5: %u \r\n",(unsigned int)gADCxConvertedData[1]);
+    printf("Channel6: %u \r\n",(unsigned int)gADCxConvertedData[2]);
+    printf("Channel7: %u \r\n",(unsigned int)gADCxConvertedData[3]);
     
     HAL_Delay(1000);
   }   

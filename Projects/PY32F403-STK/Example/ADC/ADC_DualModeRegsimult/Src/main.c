@@ -6,8 +6,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -63,9 +71,9 @@ int main(void)
     {
     }
 
-    printf("ADC1 Channel4:0x%x\r\n",HAL_ADC_GetValue(&AdcHandle)&0xfff);
+    printf("ADC1 Channel4:0x%x\r\n",(unsigned int)(HAL_ADC_GetValue(&AdcHandle)&0xfff));
     
-    printf("ADC2 Channel5:0x%x\r\n",(HAL_ADC_GetValue(&AdcHandle)>>16)&0xfff);
+    printf("ADC2 Channel5:0x%x\r\n",(unsigned int)((HAL_ADC_GetValue(&AdcHandle)>>16)&0xfff));
     
     __HAL_ADC_CLEAR_FLAG(&AdcHandle2, ADC_FLAG_EOC);
     __HAL_ADC_CLEAR_FLAG(&AdcHandle, ADC_FLAG_EOC);

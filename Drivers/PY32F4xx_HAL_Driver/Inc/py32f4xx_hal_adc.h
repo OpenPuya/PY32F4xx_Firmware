@@ -6,8 +6,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -261,9 +269,6 @@ typedef  void (*pADC_CallbackTypeDef)(ADC_HandleTypeDef *hadc); /*!< pointer to 
 /** @defgroup ADC_Scan_mode ADC scan mode
   * @{
   */
-/* Note: Scan mode values are not among binary choices ENABLE/DISABLE for     */
-/*       compatibility with other PY32 devices having a sequencer with       */
-/*       additional options.                                                  */
 #define ADC_SCAN_DISABLE         0x00000000U
 #define ADC_SCAN_ENABLE          ((uint32_t)ADC_CR1_SCAN)
 /**
@@ -379,7 +384,7 @@ typedef  void (*pADC_CallbackTypeDef)(ADC_HandleTypeDef *hadc); /*!< pointer to 
   */
 #define ADC_AWD_EVENT               ((uint32_t)ADC_FLAG_AWD)   /*!< ADC Analog watchdog event */
 
-#define ADC_AWD1_EVENT              ADC_AWD_EVENT              /*!< ADC Analog watchdog 1 event: Alternate naming for compatibility with other PY32 devices having several analog watchdogs */
+#define ADC_AWD1_EVENT              ADC_AWD_EVENT              /*!< ADC Analog watchdog 1 event */
 /**
   * @}
   */
@@ -503,8 +508,6 @@ typedef  void (*pADC_CallbackTypeDef)(ADC_HandleTypeDef *hadc); /*!< pointer to 
   * @brief Enable the ADC peripheral
   * @note ADC enable requires a delay for ADC stabilization time
   *       (refer to device datasheet, parameter tSTAB)
-  * @note On PY32F4, if ADC is already enabled this macro trigs a conversion 
-  *       SW start on regular group.
   * @param __HANDLE__: ADC handle
   * @retval None
   */
@@ -718,7 +721,7 @@ typedef  void (*pADC_CallbackTypeDef)(ADC_HandleTypeDef *hadc); /*!< pointer to 
 
 /**
   * @brief Set the selected injected channel rank
-  *        Note: on PY32F4 devices, channel rank position in JSQR register
+  *        Note: channel rank position in JSQR register
   *              is depending on total number of ranks selected into
   *              injected sequencer (ranks sequence starting from 4-JL)
   * @param _CHANNELNB_: Channel number.

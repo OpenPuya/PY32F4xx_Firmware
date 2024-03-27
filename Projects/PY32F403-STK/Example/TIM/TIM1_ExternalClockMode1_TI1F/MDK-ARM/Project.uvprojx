@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>PY32F403xD</Device>
           <Vendor>Puya</Vendor>
-          <PackID>Puya.PY32F4xx_DFP.0.0.1</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
+          <PackID>Puya.PY32F4xx_DFP.1.0.0</PackID>
+          <PackURL>https://www.puyasemi.com/</PackURL>
           <Cpu>IRAM(0x20000000,0x00010000) IROM(0x08000000,0x00060000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -412,16 +412,6 @@
               <FileType>1</FileType>
               <FilePath>..\Src\py32f4xx_it.c</FilePath>
             </File>
-            <File>
-              <FileName>py32f4xx_hal_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>py32f4xx_hal_tim_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim_ex.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -481,6 +471,16 @@
               <FileName>py32f4xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_cortex.c</FilePath>
+            </File>
+            <File>
+              <FileName>py32f4xx_hal_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>py32f4xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim_ex.c</FilePath>
             </File>
           </Files>
         </Group>

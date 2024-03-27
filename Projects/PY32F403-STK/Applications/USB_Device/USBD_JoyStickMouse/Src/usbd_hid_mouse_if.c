@@ -6,7 +6,7 @@
 #define HID_INT_EP_SIZE     4
 #define HID_INT_EP_INTERVAL 10
 
-#define USBD_VID           0xffff
+#define USBD_VID           0x36b7
 #define USBD_PID           0xffff
 #define USBD_MAX_POWER     100
 #define USBD_LANGID_STRING 1033

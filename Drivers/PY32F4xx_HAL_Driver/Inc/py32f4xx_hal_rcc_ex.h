@@ -6,8 +6,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -424,7 +432,7 @@ typedef struct
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_USART5EN);\
                                         UNUSED(tmpreg); \
                                       } while(0U)
-
+#if defined(DAC1)
 #define __HAL_RCC_DAC_CLK_ENABLE()   do { \
                                         __IO uint32_t tmpreg; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_DACEN);\
@@ -432,6 +440,7 @@ typedef struct
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_DACEN);\
                                         UNUSED(tmpreg); \
                                       } while(0U)
+#endif /* DAC1 */
 
 #define __HAL_RCC_TIM5_CLK_DISABLE()        (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM5EN))
 #define __HAL_RCC_TIM6_CLK_DISABLE()        (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM6EN))
@@ -443,7 +452,9 @@ typedef struct
 #define __HAL_RCC_USART3_CLK_DISABLE()      (RCC->APB1ENR &= ~(RCC_APB1ENR_USART3EN))
 #define __HAL_RCC_USART4_CLK_DISABLE()      (RCC->APB1ENR &= ~(RCC_APB1ENR_USART4EN))
 #define __HAL_RCC_USART5_CLK_DISABLE()      (RCC->APB1ENR &= ~(RCC_APB1ENR_USART5EN))
+#if defined(DAC1)
 #define __HAL_RCC_DAC_CLK_DISABLE()         (RCC->APB1ENR &= ~(RCC_APB1ENR_DACEN))
+#endif /* DAC1 */
 
 /**
   * @}
@@ -476,8 +487,10 @@ typedef struct
 #define __HAL_RCC_USART4_IS_CLK_DISABLED()      ((RCC->APB1ENR & (RCC_APB1ENR_USART4EN)) == RESET)
 #define __HAL_RCC_USART5_IS_CLK_ENABLED()       ((RCC->APB1ENR & (RCC_APB1ENR_USART5EN)) != RESET)
 #define __HAL_RCC_USART5_IS_CLK_DISABLED()      ((RCC->APB1ENR & (RCC_APB1ENR_USART5EN)) == RESET)
+#if defined(DAC1)
 #define __HAL_RCC_DAC_IS_CLK_ENABLED()          ((RCC->APB1ENR & (RCC_APB1ENR_DACEN)) != RESET)
 #define __HAL_RCC_DAC_IS_CLK_DISABLED()         ((RCC->APB1ENR & (RCC_APB1ENR_DACEN)) == RESET)
+#endif /* DAC1 */
 
 /**
   * @}
@@ -611,7 +624,9 @@ typedef struct
 #define __HAL_RCC_USART3_FORCE_RESET()       (RCC->APB1RSTR |= (RCC_APB1RSTR_USART3RST))
 #define __HAL_RCC_USART4_FORCE_RESET()       (RCC->APB1RSTR |= (RCC_APB1RSTR_USART4RST))
 #define __HAL_RCC_USART5_FORCE_RESET()       (RCC->APB1RSTR |= (RCC_APB1RSTR_USART5RST))
+#if defined(DAC1)
 #define __HAL_RCC_DAC_FORCE_RESET()          (RCC->APB1RSTR |= (RCC_APB1RSTR_DACRST))
+#endif /* DAC1 */
 
 #define __HAL_RCC_TIM5_RELEASE_RESET()       (RCC->APB1RSTR &= ~(RCC_APB1RSTR_TIM5RST))
 #define __HAL_RCC_TIM6_RELEASE_RESET()       (RCC->APB1RSTR &= ~(RCC_APB1RSTR_TIM6RST))
@@ -623,7 +638,10 @@ typedef struct
 #define __HAL_RCC_USART3_RELEASE_RESET()     (RCC->APB1RSTR &= ~(RCC_APB1RSTR_USART3RST))
 #define __HAL_RCC_USART4_RELEASE_RESET()     (RCC->APB1RSTR &= ~(RCC_APB1RSTR_USART4RST))
 #define __HAL_RCC_USART5_RELEASE_RESET()     (RCC->APB1RSTR &= ~(RCC_APB1RSTR_USART5RST))
+#if defined(DAC1)
 #define __HAL_RCC_DAC_RELEASE_RESET()        (RCC->APB1RSTR &= ~(RCC_APB1RSTR_DACRST))
+#endif /* DAC1 */
+
 /**
   * @}
   */
@@ -746,7 +764,7 @@ typedef struct
 #define __HAL_RCC_CAN_CONFIG(__CANCLKSOURCE__) \
                   MODIFY_REG(RCC->CFGR2, RCC_CFGR2_CANCKSEL, (uint32_t)(__CANCLKSOURCE__))
 
-/** @brief  Macro to get the USB clock.
+/** @brief  Macro to get the CAN clock.
   * @retval The clock source can be one of the following values:
   *            @arg @ref RCC_CANCLKSOURCE_PLL      PLL clock divided by 1 selected as CAN clock
   *            @arg @ref RCC_CANCLKSOURCE_PLL_DIV2 PLL clock divided by 2 selected as CAN clock

@@ -58,8 +58,7 @@
              configured through "Speed" member from GPIO_InitTypeDef structure.
         (++) In alternate mode is selection, the alternate function connected to the IO
              is configured through "Alternate" member from GPIO_InitTypeDef structure.
-        (++) Analog mode is required when a pin is to be used as ADC channel
-             or DAC output.
+        (++) Analog mode is required when a pin is to be used as ADC channel.
         (++) In case of external interrupt/event selection the "Mode" member from
              GPIO_InitTypeDef structure select the type (interrupt or event) and
              the corresponding trigger event (rising or falling or both).
@@ -87,8 +86,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>

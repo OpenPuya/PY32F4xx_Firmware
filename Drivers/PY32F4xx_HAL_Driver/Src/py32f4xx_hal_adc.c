@@ -71,7 +71,7 @@
 
     (#) Enable the ADC interface
       (++) As prerequisite, ADC clock must be configured at RCC top level.
-           Caution: On PY32F4, ADC clock frequency max is 16MHz (refer
+           Caution: ADC clock frequency max is 16MHz (refer
                     to device datasheet).
                     Therefore, ADC clock prescaler must be configured in 
                     function of ADC clock source frequency to remain below
@@ -309,8 +309,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -1187,7 +1195,7 @@ HAL_StatusTypeDef HAL_ADC_Stop(ADC_HandleTypeDef* hadc)
   *         in DMA mode.
   *         In this case, DMA resets the flag EOC and polling cannot be
   *         performed on each conversion.
-  * @note   On PY32F4 devices, limitation in case of sequencer enabled
+  * @note   limitation in case of sequencer enabled
   *         (several ranks selected): polling cannot be done on each 
   *         conversion inside the sequence. In this case, polling is replaced by
   *         wait for maximum conversion time.
@@ -1293,7 +1301,7 @@ HAL_StatusTypeDef HAL_ADC_PollForConversion(ADC_HandleTypeDef* hadc, uint32_t Ti
   
   /* Determine whether any further conversion upcoming on group regular       */
   /* by external trigger, continuous mode or scan sequence on going.          */
-  /* Note: On PY32F4 devices, in case of sequencer enabled                   */
+  /* Note: On devices, in case of sequencer enabled                   */
   /*       (several ranks selected), end of conversion flag is raised         */
   /*       at the end of the sequence.                                        */
   if(ADC_IS_SOFTWARE_START_REGULAR(hadc)        && 
@@ -1523,7 +1531,7 @@ HAL_StatusTypeDef HAL_ADC_Stop_IT(ADC_HandleTypeDef* hadc)
   *         Each of these interruptions has its dedicated callback function.
   * @note   For devices with several ADCs: This function is for single-ADC mode 
   *         only. For multimode, use the dedicated MultimodeStart function.
-  * @note   On PY32F4 devices, only ADC1 and ADC3 (ADC availability depending
+  * @note    only ADC1 and ADC3 (ADC availability depending
   *         on devices) have DMA capability.
   *         ADC2 converted data can be transferred in dual ADC mode using DMA
   *         of ADC1 (ADC master in multimode).
@@ -1675,7 +1683,7 @@ HAL_StatusTypeDef HAL_ADC_Start_DMA(ADC_HandleTypeDef* hadc, uint32_t* pData, ui
   *         should be preliminarily stopped using HAL_ADCEx_InjectedStop function.
   * @note   For devices with several ADCs: This function is for single-ADC mode 
   *         only. For multimode, use the dedicated MultimodeStop function.
-  * @note   On PY32F4 devices, only ADC1 and ADC3 (ADC availability depending
+  * @note   only ADC1 and ADC3 (ADC availability depending
   *         on devices) have DMA capability.
   * @param  hadc: ADC handle
   * @retval HAL status.
@@ -1784,7 +1792,7 @@ void HAL_ADC_IRQHandler(ADC_HandleTypeDef* hadc)
       
       /* Determine whether any further conversion upcoming on group regular   */
       /* by external trigger, continuous mode or scan sequence on going.      */
-      /* Note: On PY32F4 devices, in case of sequencer enabled               */
+      /* Note: On devices, in case of sequencer enabled               */
       /*       (several ranks selected), end of conversion flag is raised     */
       /*       at the end of the sequence.                                    */
       if(ADC_IS_SOFTWARE_START_REGULAR(hadc)        && 
@@ -1830,7 +1838,7 @@ void HAL_ADC_IRQHandler(ADC_HandleTypeDef* hadc)
       /* by external trigger, scan sequence on going or by automatic injected */
       /* conversion from group regular (same conditions as group regular      */
       /* interruption disabling above).                                       */
-      /* Note: On PY32F4 devices, in case of sequencer enabled               */
+      /* Note: On devices, in case of sequencer enabled               */
       /*       (several ranks selected), end of conversion flag is raised     */
       /*       at the end of the sequence.                                    */
       if(ADC_IS_SOFTWARE_START_INJECTED(hadc)                     || 
@@ -2039,7 +2047,7 @@ HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConf
   if ((sConfig->Channel == ADC_CHANNEL_TEMPSENSOR) ||
       (sConfig->Channel == ADC_CHANNEL_VREFINT)      )
   {
-    /* For PY32F4 devices with several ADC: Only ADC1 can access internal    */
+    /* For devices with several ADC: Only ADC1 can access internal    */
     /* measurement channels (VrefInt/TempSensor). If these channels are       */
     /* intended to be set on other ADC instances, an error is reported.       */
     if (hadc->Instance == ADC1)
@@ -2362,7 +2370,7 @@ void ADC_DMAConvCplt(DMA_HandleTypeDef *hdma)
     
     /* Determine whether any further conversion upcoming on group regular     */
     /* by external trigger, continuous mode or scan sequence on going.        */
-    /* Note: On PY32F4 devices, in case of sequencer enabled                  */
+    /* Note: On devices, in case of sequencer enabled                  */
     /*       (several ranks selected), end of conversion flag is raised       */
     /*       at the end of the sequence.                                      */
     if(ADC_IS_SOFTWARE_START_REGULAR(hadc)        && 

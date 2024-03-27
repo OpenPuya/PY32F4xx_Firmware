@@ -6,8 +6,16 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) Puya Semiconductor Co.
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
   * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
   *
   * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.</center></h2>
@@ -46,7 +54,6 @@
 /* #define HAL_CANFD_MODULE_ENABLED */
 /* #define HAL_CTC_MODULE_ENABLED */
 /* #define HAL_CRC_MODULE_ENABLED */
-/* #define HAL_DAC_MODULE_ENABLED */
 /* #define HAL_ESMC_MODULE_ENABLED */
 #define HAL_I2C_MODULE_ENABLED
 /* #define HAL_IRDA_MODULE_ENABLED */
@@ -71,7 +78,6 @@
 #define  USE_HAL_ADC_REGISTER_CALLBACKS         0U /* ADC register callback disabled       */
 #define  USE_HAL_CAN_REGISTER_CALLBACKS         0U /* CAN register callback disabled       */
 #define  USE_HAL_CTC_REGISTER_CALLBACKS         0U /* CEC register callback disabled       */
-#define  USE_HAL_DAC_REGISTER_CALLBACKS         0U /* DAC register callback disabled       */
 #define  USE_HAL_I2C_REGISTER_CALLBACKS         0U /* I2C register callback disabled       */
 #define  USE_HAL_I2S_REGISTER_CALLBACKS         0U /* I2S register callback disabled       */
 #define  USE_HAL_SD_REGISTER_CALLBACKS          0U /* SD register callback disabled        */
@@ -198,10 +204,6 @@
 #ifdef HAL_ADC_MODULE_ENABLED
  #include "py32f4xx_hal_adc.h"
 #endif /* HAL_ADC_MODULE_ENABLED */
-
-#ifdef HAL_DAC_MODULE_ENABLED
- #include "py32f4xx_hal_dac.h"
-#endif /* HAL_DAC_MODULE_ENABLED */
 
 #ifdef HAL_CANFD_MODULE_ENABLED
  #include "py32f4xx_hal_canfd.h"

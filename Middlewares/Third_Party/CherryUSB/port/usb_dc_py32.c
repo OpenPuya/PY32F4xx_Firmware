@@ -147,7 +147,8 @@ int usb_dc_init(void)
   pyusb_set_active_ep(0);
   USB->ADDR = 0;
 
-  USB->INT_USBE = USB_INTR_RESET;
+//  USB->INT_USBE = USB_INTR_RESET;
+  USB->INT_USBE = USB_INTR_RESET | USB_INTR_SUSPEND | USB_INTR_RESUME;
   USB->INT_IN1E = USB_INTR_EP0;
   USB->INT_OUT1E = 0;
 
@@ -507,6 +508,7 @@ int usbd_ep_start_read(const uint8_t ep, uint8_t *data, uint32_t data_len)
     usb_ep0_state = USB_EP0_STATE_OUT_DATA;
   } else
   {
+    USB->OUT_CSR1 &= ~USB_OUTCSR_OPR;
     USB->INT_OUT1E |= (1 << ep_idx);
   }
   pyusb_set_active_ep(old_ep_idx);
@@ -619,7 +621,7 @@ void USBD_IRQHandler(void)
     memset(&g_pyusb_udc, 0, sizeof(struct pyusb_udc));
     g_pyusb_udc.fifo_size_offset = USB_CTRL_EP_MPS;
     usbd_event_reset_handler();
-
+    USB->POWER |= USB_POWER_SUSPENDENB;
     USB->INT_IN1E = USB_INTR_EP0;
     USB->INT_OUT1E = 0;
 
@@ -632,10 +634,12 @@ void USBD_IRQHandler(void)
 
   if (is & USB_INTR_RESUME)
   {
+     usbd_event_resume_handler();
   }
 
   if (is & USB_INTR_SUSPEND)
   {
+     usbd_event_suspend_handler();
   }
 
   txis &= USB->INT_IN1E;
@@ -700,7 +704,7 @@ void USBD_IRQHandler(void)
 
         pyusb_read_packet(ep_idx, g_pyusb_udc.out_ep[ep_idx].xfer_buf, read_count);
 
-        USB->OUT_CSR1 &= ~USB_OUTCSR_OPR;
+//        USB->OUT_CSR1 &= ~USB_OUTCSR_OPR;
 
         g_pyusb_udc.out_ep[ep_idx].xfer_buf += read_count;
         g_pyusb_udc.out_ep[ep_idx].actual_xfer_len += read_count;
@@ -708,10 +712,11 @@ void USBD_IRQHandler(void)
 
         if ((read_count < g_pyusb_udc.out_ep[ep_idx].ep_mps) || (g_pyusb_udc.out_ep[ep_idx].xfer_len == 0))
         {
-//          USB->INT_OUT1E &=  ~(1 << ep_idx);
+          USB->INT_OUT1E &=  ~(1 << ep_idx);
           usbd_event_ep_out_complete_handler(ep_idx, g_pyusb_udc.out_ep[ep_idx].actual_xfer_len);
         } else
         {
+          USB->OUT_CSR1 &= ~USB_OUTCSR_OPR;
         }
       }
 

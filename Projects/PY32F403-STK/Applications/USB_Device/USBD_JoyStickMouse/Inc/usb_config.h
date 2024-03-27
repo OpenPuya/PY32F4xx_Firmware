@@ -82,6 +82,12 @@
 /* ================ USB Device Port Configuration ================*/
 #include "py32f4xx_hal.h"
 
+#define __HAL_USB_SOFT_RESET()     do { \
+                                     __HAL_RCC_USB_CLK_DISABLE(); \
+                                     HAL_Delay(10); \
+                                     __HAL_RCC_USB_CLK_ENABLE();  \
+                                   } while(0U)
+
 #define USBD_IRQn       USB_IRQn
 
 #define USBD_IRQHandler USBD_IRQHandler
