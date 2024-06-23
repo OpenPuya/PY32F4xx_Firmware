@@ -7,10 +7,10 @@
 量三种信号量实验，通过串口log，观察三种信号量的实现过程。
 
 Function descriptions:
-This example demonstrates the related API functions of FreeRTOS semaphore, 
-realizes the experiment of two semaphore, counting semaphore and mutual exclusion
-semaphore, and observes the implementation process of the three semaphore through
-serial port log.
+This sample demonstrates the relevant API functions of FreeRTOS signals to 
+implement three kinds of signaling experiments: binary signals, counting-type 
+signals and mutually exclusive signals, and observes the implementation process 
+of the three kinds of signals through the serial port log.
 
 ================================================================================
 测试环境：
@@ -29,55 +29,57 @@ GCC Version: GNU Arm Embedded Toolchain 10.3-2021.10
 使用步骤：
 1. 编译下载程序到MCU，并运行；
 2. 通过串口调试助手打印的log信息，观察任务执行过程。
-   Task1: 释放二值/计数型信号量。获取和释放互斥信号量，打印释放/获取成功或失败信
-          息。打印低优先级任务正在运行信息。
-   Task2: 获取二值信号量，打印获取成功信息。获取计数型信号量，打印信号量值。打印
-          中等优先级任务正在运行信息。
-   Task3: 获取和释放互斥信号量，打印获取/释放成功或失败信息。打印高优先级任务正
-          在运行信息。
-   打印低/中/高优先级任务正在运行任务是为了验证互斥信号量优先级继承功能。
+3. 打开宏定义SEMAPHORE_BINRAY，关闭SEMAPHORE_COUNT和SEMAPHORE_MUTEX。
+   Task1: 任务每隔2s释放一次二值信号量。
+   Task2: 获取二值信号量，打印获取成功信息。获取失败则进入等待状态。
+   Task3: 删除任务3。
+4. 打开宏定义SEMAPHORE_COUNT，关闭SEMAPHORE_BINRAY和SEMAPHORE_MUTEX。
+   Task1: 任务每隔2s释放一次计数型信号量。信号量总数加1。总数上限是50。
+   Task2: 获取计数型信号量，打印获取成功信息。信号量总数减1。
+   Task3: 删除任务3。
+5. 打开宏定义SEMAPHORE_MUTEX，关闭SEMAPHORE_BINRAY和SEMAPHORE_COUNT。
+   Task1: 任务每隔4s(3s delay延时 + 1s阻塞延时)获取和释放互斥信号量。
+   Task2: 打印任务2运行log。
+   Task3: 任务每隔1.5s(0.5s delay延时 + 1s阻塞延时)获取和释放互斥信号量。
+   步骤5：是为了验证实现互斥信号量优先级继承功能。
 
 Example execution steps:
 1. Compile and download the program to the MCU and run it;
 2. You can use the log information printed by the serial debugging assistant to 
 observe the task execution process.
-   Task1: Give binary/count semaphore. Give and Take mutually exclusive semaphore,
-          print Give/Take success or failure message. Displays information about 
-          the running of a low-priority task.
-   Task2: Take a binary semaphore and print a success message. Take a counting 
-          semaphore and print the semaphore value. The running information of a 
-          medium-priority task is displayed.
-   Task3: Take and Give mutually exclusive semaphore, print obtain/release success
-          or failure message. Print high priority job. Information in operation.
-   Print Low/medium/High priority tasks The task is running to verify the mutex 
-   priority inheritance function.
+3. Open the define SEMAPHORE_BINRAY, close SEMAPHORE_COUNT and SEMAPHORE_MUTEX.
+   Task1: The task releases a binary semaphore every 2s.
+   Task2: Get a binary semaphore and print a success message. If the acquisition
+          fails, the system enters the waiting state.
+   Task3: Delete Task 3.
+4. Open the define SEMAPHORE_COUNT, close SEMAPHORE_BINRAY and SEMAPHORE_MUTEX.
+   Task1: The task releases a counting semaphore every 2s. Add 1 to the total 
+          number of semaphores. The total number is capped at 50.
+   Task2: Obtain the counting semaphore and print the obtaining success message. 
+          Subtract 1 from the total semaphore.
+   Task3: Delete Task 3.
+5. Open the define SEMAPHORE_MUTEX, close SEMAPHORE_BINRAY and SEMAPHORE_COUNT.
+   Task1: The task obtains and releases mutually exclusive semaphore every 4s
+          (3s delay + 1s blocking delay).
+   Task2: Print Task 2 Run log.
+   Task3: The task acquires and releases mutually exclusive semaphore every 
+          1.5s(0.5s delay + 1s blocking delay).
+   Step 5: Is to verify the implementation of the MUtex priority inheritance 
+           function.
 
 ================================================================================
 注意事项：
-此样例使用到了串口打印功能，相关配置请参考下面的步骤。
-1. 编译并下载程序到MCU；
-2. 通过USB转TTL模块连接PC与STK板，STK板与USB转TTL模块的连线方式如下：
-   STK板        USB转TTL模块
-   PA02(TX) --> RX
-   PA03(RX) --> TX
-   GND      --> GND
-3. PC端打开串口调试助手，正确连接上通讯COM口，波特率设置为115200；
-4. 按STK板Reset按键，即可打印log数据。
-
-Example execution steps:
-This example uses the serial port printing function. For details about the 
-configuration, see the following steps.
-1. Compile and download the program to the MCU;
-2. Connect the PC and STK board with a USB to TTL module. The connection between 
-   the STK board and the USB to TTL module is as follows:
-   STK board        USB to TTL module
-   PA02(TX) --> RX
-   PA03(RX) --> TX
-   GND      --> GND
-3. Open a serial debugging assistant on the PC and connect to the appropriate COM 
-   port with the baud rate set to 115200;
-4. Press the Reset button on the STK board to print log data.
+STK板与USB转TTL模块的连线方式如下：
+STK板        USB转TTL模块
+PA02(TX) --> RX
+PA03(RX) --> TX
+GND      --> GND
 
 Notes:
+The STK board is wired to the USB to TTL module as follows:
+STK board    USB to TTL module
+PA02(TX) --> RX
+PA03(RX) --> TX
+GND      --> GND
 
 ================================================================================

@@ -34,7 +34,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef             AdcHandle;
-uint16_t                      aADCxConvertedData;
 TIM_HandleTypeDef             TimHandle;
 TIM_MasterConfigTypeDef       sMasterConfig;
 ADC_AnalogWDGConfTypeDef      ADCAnalogWDGConfig;

@@ -36,21 +36,21 @@ BUILD_DIR = build\Project
 ######################################
 # C sources
 C_SOURCES =  \../Src/main.c \
-../Src/py32f4xx_hal_msp.c \
-../Src/py32f4xx_it.c \
+../Src/py32f403_hal_msp.c \
+../Src/py32f403_it.c \
 ../Src/bin.c \
-../Src/system_py32f4xx.c \
+../Src/system_py32f403.c \
 ../../../../../../Drivers/BSP/PY32F403xx_Start_Kit/py32f403xx_Start_Kit.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rcc.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rcc_ex.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_gpio.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_dma.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_pwr.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_pwr_ex.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_uart.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_cortex.c \
-../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_esmc.c
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_rcc.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_rcc_ex.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_gpio.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_dma.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_pwr.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_pwr_ex.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_uart.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_cortex.c \
+../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_esmc.c
 
 
 # ASM sources
@@ -111,8 +111,8 @@ AS_INCLUDES =
 C_INCLUDES =  \
 -I../Inc \
 -I../../../../../../Drivers/BSP/PY32F403xx_Start_Kit \
--I../../../../../../Drivers/PY32F4xx_HAL_Driver/Inc \
--I../../../../../../Drivers/CMSIS/Device/PUYA/PY32F4xx/Include \
+-I../../../../../../Drivers/PY32F403_HAL_Driver/Inc \
+-I../../../../../../Drivers/CMSIS/Device/PUYA/PY32F403/Include \
 -I../../../../../../Drivers/CMSIS/Include
 
 

@@ -40,7 +40,6 @@ uint8_t TxBuff[15] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
 uint8_t RxBuff[15] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 DMA_HandleTypeDef HdmaCh1;
 DMA_HandleTypeDef HdmaCh2;
-DMA_HandleTypeDef HdmaCh3;
 
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/

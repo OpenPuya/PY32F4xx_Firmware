@@ -32,6 +32,10 @@
 #include "main.h"
 
 /* Private define ------------------------------------------------------------*/
+#define LED_GPIO_PIN                 LED3_PIN
+#define LED_GPIO_PORT                LED3_GPIO_PORT
+#define LED_GPIO_CLK_ENABLE()        LED3_GPIO_CLK_ENABLE()
+
 /* Private variables ---------------------------------------------------------*/
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -58,10 +62,10 @@ int main(void)
   while (1)
   {
     /* Delay 250ms */
-    HAL_Delay(250);   
+    HAL_Delay(250);
 
     /* Toggle LED */
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);    
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GPIO_PIN);
   }
 }
 
@@ -72,16 +76,16 @@ int main(void)
   */
 static void APP_GpioConfig(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct;
+  GPIO_InitTypeDef  GPIO_InitStruct = {0};
 
-  __HAL_RCC_GPIOA_CLK_ENABLE();                          /* Enable GPIOA clock */
+  LED_GPIO_CLK_ENABLE();                                 /* Enable clock */
 
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
+  GPIO_InitStruct.Pin = LED_GPIO_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
   GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */  
   /* GPIO Initialization */
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);    
+  HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
 }
 
 /**
@@ -116,7 +120,7 @@ static void APP_SystemClockConfig(void)
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock divided by 2 */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

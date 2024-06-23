@@ -246,8 +246,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\system_py32f4xx.c</PathWithFileName>
-      <FilenameWithoutPath>system_py32f4xx.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\system_py32f403.c</PathWithFileName>
+      <FilenameWithoutPath>system_py32f403.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -278,8 +278,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\py32f4xx_hal_msp.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_msp.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\py32f403_hal_msp.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_msp.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -290,8 +290,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\py32f4xx_it.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_it.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\py32f403_it.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_it.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -302,8 +302,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\py32f4xx_hal_timebase_tim.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_timebase_tim.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\py32f403_hal_timebase_tim.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_timebase_tim.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -330,8 +330,8 @@
   </Group>
 
   <Group>
-    <GroupName>Drivers/PY32F4xx_HAL_Driver</GroupName>
-    <tvExp>0</tvExp>
+    <GroupName>Drivers/PY32F403_HAL_Driver</GroupName>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -342,8 +342,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -354,8 +354,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_rcc.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_rcc.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_rcc.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_rcc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -366,8 +366,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_rcc_ex.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_rcc_ex.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_rcc_ex.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_rcc_ex.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -378,8 +378,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_gpio.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_gpio.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_gpio.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -390,8 +390,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_dma.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_dma.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_dma.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_dma.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -402,8 +402,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_pwr.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_pwr.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_pwr.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_pwr.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -414,8 +414,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_pwr_ex.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_pwr_ex.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_pwr_ex.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_pwr_ex.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -426,8 +426,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_uart.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_uart.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_uart.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_uart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -438,8 +438,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_cortex.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_cortex.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_cortex.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_cortex.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -450,8 +450,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_flash.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_flash.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_flash.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_flash.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -462,8 +462,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_usart.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_usart.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_usart.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_usart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -474,8 +474,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_tim.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_tim.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_tim.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -486,8 +486,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim_ex.c</PathWithFileName>
-      <FilenameWithoutPath>py32f4xx_hal_tim_ex.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_tim_ex.c</PathWithFileName>
+      <FilenameWithoutPath>py32f403_hal_tim_ex.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

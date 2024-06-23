@@ -337,9 +337,9 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\PY32F403xx_Start_Kit</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\PUYA\PY32F4xx\Include</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\PUYA\PY32F403\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
-                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Inc</state>
+                    <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\Inc</state>
                 </option>
                 <option>
@@ -1080,40 +1080,40 @@
         <group>
             <name>CMSIS</name>
             <file>
-                <name>$PROJ_DIR$\..\Src\system_py32f4xx.c</name>
+                <name>$PROJ_DIR$\..\Src\system_py32f403.c</name>
             </file>
         </group>
         <group>
-            <name>PY32F4xx_HAL_Driver</name>
+            <name>PY32F403_HAL_Driver</name>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_cortex.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_cortex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_dma.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_dma.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_esmc.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_esmc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_gpio.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_gpio.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_pwr.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_pwr.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_pwr_ex.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_pwr_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_rcc.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_rcc.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_rcc_ex.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_rcc_ex.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_uart.c</name>
+                <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_uart.c</name>
             </file>
         </group>
     </group>
@@ -1134,10 +1134,10 @@
                 <name>$PROJ_DIR$\..\Src\main.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Src\py32f4xx_hal_msp.c</name>
+                <name>$PROJ_DIR$\..\Src\py32f403_hal_msp.c</name>
             </file>
             <file>
-                <name>$PROJ_DIR$\..\Src\py32f4xx_it.c</name>
+                <name>$PROJ_DIR$\..\Src\py32f403_it.c</name>
             </file>
         </group>
     </group>

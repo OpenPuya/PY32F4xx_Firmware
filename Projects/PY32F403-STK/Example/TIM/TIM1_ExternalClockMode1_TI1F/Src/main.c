@@ -68,7 +68,7 @@ int main(void)
   }
 
   sClockSourceConfig.ClockFilter = 0;                                  /* No filter */
-  sClockSourceConfig.ClockPolarity = TIM_CLOCKPOLARITY_NONINVERTED;    /* ETR is non-inverted, active at high level or rising edge */
+  sClockSourceConfig.ClockPolarity = TIM_CLOCKPOLARITY_BOTHEDGE;       /* Capture triggered by both rising and falling edges on timer input */
   sClockSourceConfig.ClockPrescaler = TIM_ETRPRESCALER_DIV1;           /* No prescaler is used */
   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_TI1ED;              /* External clock source mode 1 (TTI1FP1 + edge detect.) */
   HAL_TIM_ConfigClockSource(&TimHandle, &sClockSourceConfig);          /* Configure clock source */

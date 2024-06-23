@@ -46,7 +46,6 @@ extern "C" {
 /* Exported variables prototypes ---------------------------------------------*/
 extern DMA_HandleTypeDef HdmaCh1;
 extern DMA_HandleTypeDef HdmaCh2;
-extern DMA_HandleTypeDef HdmaCh3;
 extern SPI_HandleTypeDef Spi1Handle;
 extern uint8_t DmaOnFlag, DmaTxRxFlag;
 

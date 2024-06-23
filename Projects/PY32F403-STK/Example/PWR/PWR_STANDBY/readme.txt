@@ -7,11 +7,7 @@
 
 Function descriptions:
 This sample demonstrates the wake-up feature using the wakeup pin in standby 
-mode. When the program starts running, the LED will be on. Press the button, 
-and the LED will turn off, entering standby mode. When a rising edge is detected 
-on PA02, the program will exit standby mode. The LED will blink for 5 seconds 
-and then be turned on again.
-
+mode. 
 ================================================================================
 测试环境：
 测试用板：PY32F403_STK
@@ -38,7 +34,6 @@ Example execution steps:
    entering standby mode;
 3. Generate a rising edge on PA02, and the program will exit standby mode. 
    The LED will blink for 5 seconds and then be turned on again.
-
 ================================================================================
 注意事项：
 

@@ -34,7 +34,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef    TimHandle;
-uint32_t temp;
+uint32_t temp = 0;
 
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -96,7 +96,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     if (temp == 3)
     {
       /* Modify TIM auto reload value */
-      __HAL_TIM_SET_AUTORELOAD(&TimHandle, 6400 - 1); 
+      __HAL_TIM_SET_AUTORELOAD(htim, 6400 - 1); 
     }
   }
 }

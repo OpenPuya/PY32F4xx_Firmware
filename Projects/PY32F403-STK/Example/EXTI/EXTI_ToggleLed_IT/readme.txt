@@ -25,11 +25,11 @@ GCC Version: GNU Arm Embedded Toolchain 10.3-2021.10
 ================================================================================
 使用步骤：
 1. 编译下载程序到MCU，并运行；
-2. 每按一次用户按键，观察到LED翻转一次；
+2. PA0上每一个下降沿，观察到LED翻转一次；
 
 Example execution steps:
 1.Compile and download the program to MCU and run it;
-2.Observe the LED toggle once every time the user presses the button;
+2.The LED was observed to flip once on each falling edge of PA0;
 ================================================================================
 注意事项：
 

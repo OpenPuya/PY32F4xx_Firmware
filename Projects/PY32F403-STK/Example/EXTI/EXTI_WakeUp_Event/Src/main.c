@@ -33,7 +33,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-EXTI_HandleTypeDef exti_handle;
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -61,9 +60,6 @@ int main(void)
   /* Configure EXTI */
   APP_ConfigureEXTI();
   
-  /* Suspend systick */
-  HAL_SuspendTick();
-  
   /* LED on */
   BSP_LED_On(LED_GREEN);
   
@@ -71,6 +67,9 @@ int main(void)
   while (BSP_PB_GetState(BUTTON_KEY) == 1)
   {
   }
+  
+  /* Suspend systick */
+  HAL_SuspendTick();
   
   /* LED off */
   BSP_LED_Off(LED_GREEN);
@@ -137,7 +136,7 @@ static void APP_SystemClockConfig(void)
   */
 static void APP_ConfigureEXTI(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct;
+  GPIO_InitTypeDef  GPIO_InitStruct = {0};
   __HAL_RCC_GPIOA_CLK_ENABLE();                  /* Enable GPIOA clock */
   GPIO_InitStruct.Mode  = GPIO_MODE_EVT_FALLING; /* GPIO is set to external Interrupt Mode with Falling edge trigger detection */
   GPIO_InitStruct.Pull  = GPIO_PULLUP;           /* PULL UP */

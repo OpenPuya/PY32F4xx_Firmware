@@ -34,7 +34,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef    TimHandle;
-TIM_OC_InitTypeDef sConfig;
 uint32_t Arr_DMA[6] = {1000 - 1, 8000 - 1, 1 - 1, 1000 - 1, 4000 - 1, 1 - 1};
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -90,9 +89,7 @@ int main(void)
   */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-  BSP_LED_On(LED_GREEN);
-  HAL_Delay(50);
-  BSP_LED_Off(LED_GREEN);
+  BSP_LED_Toggle(LED_GREEN);
 }
 
 /**

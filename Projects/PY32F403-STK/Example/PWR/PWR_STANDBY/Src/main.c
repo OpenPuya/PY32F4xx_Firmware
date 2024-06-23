@@ -32,9 +32,9 @@
 #include "main.h"
 
 /* Private define ------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
 uint32_t LED_BlinkingTime=0;
 
-/* Private variables ---------------------------------------------------------*/
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -138,7 +138,7 @@ static void APP_SystemClockConfig(void)
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock divided by 2 */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

@@ -49,6 +49,9 @@ int main(void)
   /* Reset of all peripherals, Initializes the Systick. */
   HAL_Init();
   
+  /* Configure LED */
+  BSP_LED_Init(LED_GREEN);
+  
   /* Configure PA08 pin as MCO function, output HSI48M */
   HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI48M, RCC_MCODIV_1);
   
@@ -88,7 +91,6 @@ static void APP_SystemClockConfig(void)
                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
   OscInitstruct.HSEState        = RCC_HSE_OFF;                              /* Close HSE */
 /* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                     /* Choose HSE frequency of 16-32MHz */
-/* OscInitstruct.HSEPredivValue  = RCC_HSE_PREDIV_DIV1;*/                   /* HSE as PLL clock source time division frequency value */
   OscInitstruct.HSI48MState     = RCC_HSI48M_ON;                            /* Enable HSI48M */
   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
   OscInitstruct.LSEState        = RCC_LSE_ON;                               /* Enable LSE */
@@ -113,6 +115,17 @@ static void APP_SystemClockConfig(void)
   {
     APP_ErrorHandler();
   }
+}
+
+/**
+  * @brief  CTC OK callbacks
+  * @param  CtcHandle: CTC handle
+  * @retval None
+  */
+void HAL_CTC_CKOKCallback(CTC_HandleTypeDef *CTChadle)
+{
+  /* Turn on LED */
+  BSP_LED_On(LED_GREEN);
 }
 
 /**

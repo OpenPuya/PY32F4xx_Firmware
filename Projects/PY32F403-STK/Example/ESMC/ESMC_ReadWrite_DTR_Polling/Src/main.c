@@ -58,8 +58,8 @@ static uint8_t APP_GetFlashStatus(uint8_t comm);
   */
 int main(void)
 {
-  uint32_t i, cnt, progAddr;
-  uint8_t *pData;
+  uint32_t i = 0, cnt = 0, progAddr = 0;
+  uint8_t *pData = NULL;
   uint32_t address = 0;
 
   /* Reset of all peripherals, Initializes the Systick. */ 
@@ -115,11 +115,11 @@ int main(void)
     APP_ErrorHandler();
   }
 
-  /* Data verification correct, LED flashing */
+  BSP_LED_On(LED_GREEN);
+
   while(1)
   {
-    HAL_Delay(500);
-    BSP_LED_Toggle(LED_GREEN);
+
   }
 }
 
@@ -147,8 +147,8 @@ static void APP_EsmcInit()
   */
 static uint8_t APP_GetFlashStatus(uint8_t command)
 {
-  ESMC_CommandTypeDef cmdStc;
-  uint8_t status;
+  ESMC_CommandTypeDef cmdStc = {0};
+  uint8_t status = 0;
 
   cmdStc.TransferFormat    = ESMC_TRANSFER_FORMAT_SINGLE;
   cmdStc.InstructionMode   = ESMC_INSTRUCTION_SINGLE_LINE;
@@ -174,7 +174,7 @@ static uint8_t APP_GetFlashStatus(uint8_t command)
   */
 static void APP_WriteEnable()
 {
-  ESMC_CommandTypeDef commandStc;
+  ESMC_CommandTypeDef commandStc = {0};
 
   /* write enable */
   commandStc.TransferFormat    = ESMC_TRANSFER_FORMAT_SINGLE;
@@ -196,7 +196,7 @@ static void APP_WriteEnable()
   */
 static void APP_EraseSector(uint32_t address)
 {
-  ESMC_CommandTypeDef cmdStc;
+  ESMC_CommandTypeDef cmdStc = {0};
 
   /* write enable */
   APP_WriteEnable();
@@ -225,7 +225,7 @@ static void APP_EraseSector(uint32_t address)
   */
 static void APP_PageProgram(uint8_t *pData, uint32_t addr, uint32_t nBytes)
 {
-  ESMC_CommandTypeDef cmdStc;
+  ESMC_CommandTypeDef cmdStc = {0};
 
   /* write enable */
   APP_WriteEnable();
@@ -256,7 +256,7 @@ static void APP_PageProgram(uint8_t *pData, uint32_t addr, uint32_t nBytes)
   */
 static void APP_DataRead(uint8_t *pData, uint32_t address, uint32_t nBytes)
 {
-  ESMC_CommandTypeDef cmdStc;
+  ESMC_CommandTypeDef cmdStc = {0};
 
   cmdStc.TransferFormat    = ESMC_TRANSFER_FORMAT_SINGLE;
   cmdStc.InstructionMode   = ESMC_INSTRUCTION_SINGLE_LINE;

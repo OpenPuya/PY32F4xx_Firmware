@@ -33,17 +33,17 @@ Example execution steps:
 3. When PA1 is flipped for the third time, the period becomes 2.5Hz
 ================================================================================
 注意事项：
-修改main.c中的第57行
+修改main.c中
 配置TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;使能自动重载
 功能，新的ARR值在第四次进中断时生效；
 配置TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;禁止自动重
-载功能，新的ARR值在第三次进中断时生效,生效后，LED灯以2.5HZ的频率翻转。
+载功能，新的ARR值在第三次进中断时生效,生效后，LED灯以1.25HZ的频率翻转。
 
 Notes:
-Modify line 56 in main.c.
+Modify in main.c.
 Set TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE to enable
 autoreload,and new ARR value will takes effect on the fourth interrupt generate.
 Set TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE to disable
 autoreload,and new ARR value will takes effect on the third interrupt generate.
-After taking effect, the LED lights blinked at a frequency of 2.5HZ.
+After taking effect, the LED lights blinked at a frequency of 1.25HZ.
 ================================================================================

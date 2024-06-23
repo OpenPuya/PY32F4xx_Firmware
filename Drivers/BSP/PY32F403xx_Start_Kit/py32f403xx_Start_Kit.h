@@ -43,13 +43,13 @@
   * @{
   */
 
-/** @defgroup py32f4xx_Start_Kit
+/** @defgroup py32f403_Start_Kit
   * @brief This section contains the exported types, contants and functions
   *        required to use the Nucleo 32 board.
   * @{
   */
 
-/** @defgroup py32f4xx_Start_Kit_Exported_Types Exported Types
+/** @defgroup py32f403_Start_Kit_Exported_Types Exported Types
   * @{
   */
 typedef enum

@@ -68,8 +68,8 @@ static void APP_XIPConfig(void);
   */
 int main(void)
 {
-  uint32_t i, cnt, progAddr;
-  uint8_t *pData;
+  uint32_t i = 0, cnt = 0 , progAddr =0;
+  uint8_t *pData = NULL;
   uint32_t address = 0;
 
   /* Reset of all peripherals, Initializes the Systick. */ 
@@ -149,7 +149,6 @@ int main(void)
 
   while(1)
   {
-    ;
   }
 }
 
@@ -176,8 +175,6 @@ static void JumtoIap(uint32_t addr)
   */
 static void APP_EsmcInit()
 {
-  __HAL_RCC_ESMC_CLK_ENABLE();
-
   hesmc.Instance=ESMC;
   ESMC_initTypeDef.ClockPrescaler=0x4;
   ESMC_initTypeDef.ClockMode=ESMC_CLOCK_MODE_0;
@@ -193,7 +190,7 @@ static void APP_EsmcInit()
   */
 static void APP_XIPConfig()
 {
-  ESMC_CommandTypeDef cmdStc;
+  ESMC_CommandTypeDef cmdStc = {0};
 
   cmdStc.TransferFormat    = ESMC_TRANSFER_FORMAT_QUAD;
   cmdStc.InstructionMode   = ESMC_INSTRUCTION_SINGLE_LINE;
@@ -214,8 +211,8 @@ static void APP_XIPConfig()
   */
 static uint8_t APP_GetFlashStatus(uint8_t command)
 {
-  ESMC_CommandTypeDef cmdStc;
-  uint8_t status;
+  ESMC_CommandTypeDef cmdStc = {0};
+  uint8_t status = 0;
 
   cmdStc.TransferFormat    = ESMC_TRANSFER_FORMAT_SINGLE;
   cmdStc.InstructionMode   = ESMC_INSTRUCTION_SINGLE_LINE;
@@ -242,7 +239,7 @@ static uint8_t APP_GetFlashStatus(uint8_t command)
   */
 static void APP_SetFlashStatus(uint8_t status, uint8_t command)
 {
-  ESMC_CommandTypeDef cmdStc;
+  ESMC_CommandTypeDef cmdStc = {0};
 
   cmdStc.TransferFormat    = ESMC_TRANSFER_FORMAT_SINGLE;
   cmdStc.InstructionMode   = ESMC_INSTRUCTION_SINGLE_LINE;
@@ -266,7 +263,7 @@ static void APP_SetFlashStatus(uint8_t status, uint8_t command)
   */
 static void APP_WriteEnable()
 {
-  ESMC_CommandTypeDef commandStc;
+  ESMC_CommandTypeDef commandStc = {0};
 
   /* write enable */
   commandStc.TransferFormat    = ESMC_TRANSFER_FORMAT_SINGLE;
@@ -288,7 +285,7 @@ static void APP_WriteEnable()
   */
 static void APP_SubBlockSector(uint32_t address)
 {
-  ESMC_CommandTypeDef cmdStc;
+  ESMC_CommandTypeDef cmdStc = {0};
 
   /* write enbale */
   APP_WriteEnable();
@@ -317,7 +314,7 @@ static void APP_SubBlockSector(uint32_t address)
   */
 static void APP_PageProgram(uint8_t *pData, uint32_t addr, uint32_t nBytes)
 {
-  ESMC_CommandTypeDef cmdStc;
+  ESMC_CommandTypeDef cmdStc = {0};
 
   /* write enbale */
   APP_WriteEnable();

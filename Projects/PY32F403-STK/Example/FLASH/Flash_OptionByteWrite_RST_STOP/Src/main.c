@@ -56,6 +56,7 @@ int main(void)
   
   /* Initialize Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
+
   /* Wait For Button pressed */
   while (BSP_PB_GetState(BUTTON_USER))
   {

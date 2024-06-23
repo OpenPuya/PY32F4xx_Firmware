@@ -41,12 +41,11 @@ EventGroupHandle_t EventGroupHandle;  /* Define a EventGroupHandle */
 
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
-#define EVENTBIT_0	(1<<0)
-#define EVENTBIT_1	(1<<1)
+#define EVENTBIT_0  (1<<0)
+#define EVENTBIT_1  (1<<1)
 
 /* Private function prototypes -----------------------------------------------*/
 static void APP_SystemClockConfig(void);
-static void APP_GpioConfig(void);
 static void Task1(void *pvParamters);
 static void Task2(void *pvParamters);
 static void EventGroupCreate(void);
@@ -63,11 +62,8 @@ int main(void)
   /* System clock configuration */
   APP_SystemClockConfig();
 
-  /* Initialize UART */	
+  /* Initialize UART */
   BSP_USART_Config();
-
-  /* GPIO configuration */
-  APP_GpioConfig();
 
   /* Create event group */
   EventGroupCreate();
@@ -94,11 +90,13 @@ static void Task1(void *pvParamters)
     if(CountValue == 10)
     {
       xEventGroupSetBits(EventGroupHandle, EVENTBIT_0);
+      printf("Task1: Set bit0\r\n");
     }
     /* If CountValue = 20,prepare write EVENTBIT_1 to EventGroupHandle */
     else if(CountValue == 20)
     {
       xEventGroupSetBits(EventGroupHandle, EVENTBIT_1);
+      printf("Task1: Set bit1\r\n");
     }
     CountValue++;
     /* If CountValue count 20,set CountValue = 0 */
@@ -106,7 +104,7 @@ static void Task1(void *pvParamters)
     {
       CountValue = 0;
     }
-    /* vTaskDelay(1000): Blocking delay,This Task1 goes into a blocked state after invocation */
+    /* vTaskDelay(100): Blocking delay,Task1 goes into a blocked state after invocation */
     vTaskDelay(100);
   }
 }
@@ -131,7 +129,7 @@ static void Task2(void *pvParamters)
                                                                  pdTRUE:  All waiting event bits are set to one; 
                                                                  pdFALSE: Set any one of the waiting event bits to one */
                                     portMAX_DELAY);           /* Don't get the data you want, keep waiting, task enters the blocked state. */
-    printf("EventBit:0x%x\r\n",(unsigned int)EventBit);
+    printf("Task2: EventBit:0x%x\r\n",(unsigned int)EventBit);
   }
 }
 
@@ -154,25 +152,6 @@ static void EventGroupCreate()
   {
     printf("Event group create fail!\r\n");
   }
-}
-
-/**
-  * @brief  GPIO configuration
-  * @param  None
-  * @retval None
-  */
-static void APP_GpioConfig(void)
-{
-  GPIO_InitTypeDef  GPIO_InitStruct;
-
-  __HAL_RCC_GPIOA_CLK_ENABLE();                          /* Enable GPIOA clock */
-
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
-  GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */  
-  /* GPIO Initialization */
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);    
 }
 
 /**
@@ -205,9 +184,9 @@ static void APP_SystemClockConfig(void)
 
   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
-  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
-  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

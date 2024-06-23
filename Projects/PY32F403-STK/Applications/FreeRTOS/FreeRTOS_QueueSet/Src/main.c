@@ -49,7 +49,6 @@ QueueSetHandle_t QueueSetHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 static void APP_SystemClockConfig(void);
-static void APP_GpioConfig(void);
 static void Task1(void *pvParamters);
 static void Task2(void *pvParamters);
 static void QueueSetCreate(void);
@@ -68,9 +67,6 @@ int main(void)
 
   /* Initialize UART */	
   BSP_USART_Config();
-
-  /* GPIO configuration */
-  APP_GpioConfig();
 
   /* Create the tasks that are created using the original xTaskCreate() API function. */
   xTaskCreate( Task1, "Task1", 128, NULL, 1, NULL );  
@@ -103,7 +99,7 @@ static void Task1(void *pvParamters)
       /* Err != pdFALSE,send success,output CountValue. */
       if(Err != pdFALSE)
       {
-        printf("queue send success!\r\n");
+        printf("Task1: queue send success!\r\n");
       }
     }
     /* If CountValue = 20,prepare give semaphore */
@@ -114,7 +110,7 @@ static void Task1(void *pvParamters)
       /* Err != pdFALSE,give success. */
       if(Err != pdFALSE)
       {
-        printf("semaphore release success!\r\n");
+        printf("Task1: semaphore release success!\r\n");
       }
     }
     CountValue ++;
@@ -136,8 +132,8 @@ static void Task1(void *pvParamters)
 static void Task2(void *pvParamters)
 {
   /* Define a MemberHandle*/
-  QueueSetMemberHandle_t MemberHandle;
-  uint8_t CountValue;
+  QueueSetMemberHandle_t MemberHandle = {0};
+  uint8_t CountValue = 0;
   BaseType_t Err = 0;
   while(1)
   { 
@@ -153,7 +149,7 @@ static void Task2(void *pvParamters)
       if(Err == pdTRUE)
       {
         /* Output CountValue value */
-        printf("Receive queue value = %d\r\n",CountValue);
+        printf("Task2: Receive queue value = %d\r\n",CountValue);
       }
     }
     /* MemberHandle = QueueHandle,prepare take semaphore. */
@@ -165,7 +161,7 @@ static void Task2(void *pvParamters)
       /* Err = pdTRUE,take success. */
       if(Err == pdTRUE)
       {
-        printf("Take semaphore succuss!\r\n");
+        printf("Task2: Take semaphore succuss!\r\n");
       }
     }
     else
@@ -193,29 +189,10 @@ static void QueueSetCreate()
   QueueHandle  = xQueueCreate(QUEUEU_NUM, sizeof(uint8_t));
   /* Create binary semaphore,return a value to SemphrHandle. */
   SemphrHandle = xSemaphoreCreateBinary();
-	
+
   /* Add QueueHandle and SemphrHandle to QueueSetHandle */
   xQueueAddToSet(QueueHandle , QueueSetHandle);
   xQueueAddToSet(SemphrHandle, QueueSetHandle);
-}
-
-/**
-  * @brief  GPIO configuration
-  * @param  None
-  * @retval None
-  */
-static void APP_GpioConfig(void)
-{
-  GPIO_InitTypeDef  GPIO_InitStruct;
-
-  __HAL_RCC_GPIOA_CLK_ENABLE();                          /* Enable GPIOA clock */
-
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
-  GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */  
-  /* GPIO Initialization */
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);    
 }
 
 /**
@@ -248,9 +225,9 @@ static void APP_SystemClockConfig(void)
 
   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
-  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
-  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

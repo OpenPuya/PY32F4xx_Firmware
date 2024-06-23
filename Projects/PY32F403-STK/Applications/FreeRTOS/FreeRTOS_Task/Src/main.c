@@ -39,7 +39,6 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void APP_SystemClockConfig(void);
-static void APP_GpioConfig(void);
 static void Task1(void *pvParamters);
 static void Task2(void *pvParamters);
 static void Task3(void *pvParamters);
@@ -59,9 +58,6 @@ int main(void)
   /* Initialize UART */
   BSP_USART_Config();
 
-  /* GPIO configuration */
-  APP_GpioConfig();
-
   /* Create the tasks that are created using the original xTaskCreate() API function. */
   xTaskCreate( Task1, "Task1", 128, NULL, 1, NULL );
   xTaskCreate( Task2, "Task2", 128, NULL, 2, NULL );
@@ -72,7 +68,7 @@ int main(void)
 }
 
 /**
-  * @brief  Toggle LED,express task1 is running.
+  * @brief  Output log,express task1 is running.
   * @param  *pvParamters: The parameters passed to the task function when the task is created
   * @retval None
   */
@@ -80,9 +76,7 @@ static void Task1(void *pvParamters)
 {
   while (1)
   {
-    /* Toggle GPIO pin control LED On or Off. */
-    HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
-    /* vTaskDelay(500): Blocking delay,This Task1 goes into a blocked state after invocation */
+    /* vTaskDelay(500): Blocking delay,Task1 goes into a blocked state after invocation */
     vTaskDelay(500);
     printf("Task1 is running\r\n");
   }
@@ -97,7 +91,7 @@ static void Task2(void *pvParamters)
 {
   while(1)
   {
-    /* vTaskDelay(500): Blocking delay,This Task1 goes into a blocked state after invocation */
+    /* vTaskDelay(500): Blocking delay,Task2 goes into a blocked state after invocation */
     vTaskDelay(500);
     printf("Task2 is running\r\n");
   }
@@ -112,29 +106,10 @@ static void Task3(void *pvParamters)
 {
   while(1)
   {
-    /* vTaskDelay(500): Blocking delay,This Task1 goes into a blocked state after invocation */
+    /* vTaskDelay(500): Blocking delay,Task3 goes into a blocked state after invocation */
     vTaskDelay(500);
     printf("Task3 is running\r\n");
   }
-}
-
-/**
-  * @brief  GPIO configuration
-  * @param  None
-  * @retval None
-  */
-static void APP_GpioConfig(void)
-{
-  GPIO_InitTypeDef  GPIO_InitStruct;
-
-  __HAL_RCC_GPIOA_CLK_ENABLE();                          /* Enable GPIOA clock */
-
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
-  GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */
-  /* GPIO Initialization */
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 }
 
 /**
@@ -167,9 +142,9 @@ static void APP_SystemClockConfig(void)
 
   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
-  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
-  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

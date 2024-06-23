@@ -272,13 +272,13 @@ static void APP_SystemClockConfig(void)
   */
 static void APP_FlashErase(void)
 {
-  uint32_t PAGEError = 0;
+  uint32_t SECTORError = 0;
   FLASH_EraseInitTypeDef EraseInitStruct={0};
 
   EraseInitStruct.TypeErase   = FLASH_TYPEERASE_SECTORERASE;        /* Sector Erase */
   EraseInitStruct.SectorAddress = FLASH_USER_START_ADDR;            /* Erase Start Address */
   EraseInitStruct.NbSectors  = 2;                                   /* Sector Erase Numbers */
-  if (HAL_FLASHEx_Erase(&EraseInitStruct, &PAGEError) != HAL_OK)    /* Sector Erase Start */
+  if (HAL_FLASHEx_Erase(&EraseInitStruct, &SECTORError) != HAL_OK)  /* Sector Erase Start */
   {
     APP_ErrorHandler();
   }

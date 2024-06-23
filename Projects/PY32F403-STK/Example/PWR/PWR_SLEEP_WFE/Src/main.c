@@ -98,8 +98,10 @@ int main(void)
   */
 static void APP_EventConfig(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct;
+  GPIO_InitTypeDef  GPIO_InitStruct = {0};
+
   __HAL_RCC_GPIOA_CLK_ENABLE();                  /* Enable GPIOA clock */
+
   GPIO_InitStruct.Mode  = GPIO_MODE_EVT_FALLING; /* GPIO mode: Falling edge event */
   GPIO_InitStruct.Pull  = GPIO_PULLUP;           /* Pull-up */
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;  /* High-speed */
@@ -139,7 +141,7 @@ static void APP_SystemClockConfig(void)
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock divided by 2 */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

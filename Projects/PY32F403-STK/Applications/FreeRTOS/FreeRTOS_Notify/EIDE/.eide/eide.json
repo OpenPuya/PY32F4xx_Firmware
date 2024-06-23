@@ -22,7 +22,7 @@
         "name": "Common",
         "files": [
           {
-            "path": "../Src/system_py32f4xx.c"
+            "path": "../Src/system_py32f403.c"
           },
           {
             "path": "startup_py32f403xx.s"
@@ -85,46 +85,46 @@
         ]
       },
       {
-        "name": "PY32F4xx_HAL_Driver",
+        "name": "PY32F403_HAL_Driver",
         "files": [
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_cortex.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_cortex.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_dma.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_dma.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_flash.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_flash.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_gpio.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_gpio.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_pwr_ex.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_pwr_ex.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_pwr.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_pwr.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rcc_ex.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_rcc_ex.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_rcc.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_rcc.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_tim_ex.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_tim_ex.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_tim.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_tim.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_uart.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_uart.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal_usart.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal_usart.c"
           },
           {
-            "path": "../../../../../../Drivers/PY32F4xx_HAL_Driver/Src/py32f4xx_hal.c"
+            "path": "../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_hal.c"
           }
         ],
         "folders": []
@@ -136,13 +136,13 @@
             "path": "../Src/main.c"
           },
           {
-            "path": "../Src/py32f4xx_hal_msp.c"
+            "path": "../Src/py32f403_hal_msp.c"
           },
           {
-            "path": "../Src/py32f4xx_hal_timebase_tim.c"
+            "path": "../Src/py32f403_hal_timebase_tim.c"
           },
           {
-            "path": "../Src/py32f4xx_it.c"
+            "path": "../Src/py32f403_it.c"
           }
         ],
         "folders": []
@@ -200,12 +200,12 @@
         "name": "default",
         "incList": [
           "../../../../../../Drivers/BSP/PY32F403xx_Start_Kit",
-          "../../../../../../Drivers/CMSIS/Device/PUYA/PY32F4xx/Include",
           "../../../../../../Drivers/CMSIS/Include",
-          "../../../../../../Drivers/PY32F4xx_HAL_Driver/Inc",
           "../Inc",
           "../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include",
-          "../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F"
+          "../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F",
+          "../../../../../../Drivers/CMSIS/Device/PUYA/PY32F403/Include",
+          "../../../../../../Drivers/PY32F403_HAL_Driver/Inc"
         ],
         "libList": [],
         "sourceDirList": [],

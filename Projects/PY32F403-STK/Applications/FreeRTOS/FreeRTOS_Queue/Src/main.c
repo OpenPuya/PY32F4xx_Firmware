@@ -48,7 +48,6 @@ char BigBuff[100] = {"Puya semiconductor welcome to you!"};
 
 /* Private function prototypes -----------------------------------------------*/
 static void APP_SystemClockConfig(void);
-static void APP_GpioConfig(void);
 static void Task1(void *pvParamters);
 static void Task2(void *pvParamters);
 static void Task3(void *pvParamters);
@@ -68,9 +67,6 @@ int main(void)
 
   /* Initialize UART */
   BSP_USART_Config();
-
-  /* GPIO configuration */
-  APP_GpioConfig();
 
   /* Create queue */
   QueueCreate();
@@ -93,33 +89,35 @@ int main(void)
 static void Task1(void *pvParamters)
 {
   uint8_t CountValue = 0;
-  char * TempBuff;
+  char * TempBuff = NULL;
   BaseType_t Err;
   TempBuff = BigBuff;
   while (1)
   {
-    /* if count_value count 10,prepare send count_value to Key_Queue */
+    /* if CountValue count 10,prepare send count_value to Key_Queue */
     if(CountValue == 10)
     {
       /* Send CountValue to KeyQueue,return a value to Err */
       /* portMAX_DELAY: don't get the data you want, keep waiting, task enters the blocked state. */
       Err = xQueueSend(KeyQueue, &CountValue, portMAX_DELAY);
+      printf("Task1: CountValue send success\r\n");
       /* Err = errQUEUE_FULL,send fail. */
       if(Err == errQUEUE_FULL)
       {
-        printf("KeyQueue Full, data send fail!\r\n");
+        printf("Task1: KeyQueue Full, data send fail!\r\n");
       }
     }
-    /* if count_value count 20,prepare send TempBuff to BigDataQueue */
+    /* if CountValue count 20,prepare send TempBuff to BigDataQueue */
     else if(CountValue == 20)
     {
       /* Send TempBuff to BigDataQueue,return a value to Err */
       /* portMAX_DELAY: don't get the data you want, keep waiting, task enters the blocked state. */
       Err = xQueueSend(BigDataQueue, &TempBuff, portMAX_DELAY);
+      printf("Task1: CountValue send success\r\n");
       /* Err = errQUEUE_FULL,send fail. */
       if(Err == errQUEUE_FULL)
       {
-        printf("BIGDATAQueue Full, data send fail!\r\n");
+        printf("Task1: BIGDATAQueue Full, data send fail!\r\n");
       }
     }
     CountValue++;
@@ -128,7 +126,7 @@ static void Task1(void *pvParamters)
     {
       CountValue = 0;
     }
-    /* vTaskDelay(100): Blocking delay,This Task1 goes into a blocked state after invocation */
+    /* vTaskDelay(100): Blocking delay,Task1 goes into a blocked state after invocation */
     vTaskDelay(100);
   }
 }
@@ -141,7 +139,7 @@ static void Task1(void *pvParamters)
 static void Task2(void *pvParamters)
 {
   uint8_t    KeyValue = 0;
-  BaseType_t Err;
+  BaseType_t Err = 0;
   while(1)
   { 
     /* Receive a byte from Key_queue to key_value */
@@ -150,7 +148,7 @@ static void Task2(void *pvParamters)
     /* Err = pdTRUE,recreive success. */
     if(Err == pdTRUE)
     {
-      printf("KeyValue = %d\r\n",KeyValue);
+      printf("Task2: KeyValue = %d\r\n",KeyValue);
     }
   }
 }
@@ -162,8 +160,8 @@ static void Task2(void *pvParamters)
   */
 static void Task3(void *pvParamters)
 {
-  char *     TempBuff;
-  BaseType_t Err;
+  char *     TempBuff = NULL;
+  BaseType_t Err = 0;
 
   while(1)
   {
@@ -173,7 +171,7 @@ static void Task3(void *pvParamters)
     /* Err = pdTRUE,recreive success. */
     if(Err == pdTRUE)
     {
-      printf("%s\r\n", TempBuff);
+      printf("Task3: %s\r\n", TempBuff);
     }
   }
 }
@@ -212,25 +210,6 @@ static void QueueCreate()
 }
 
 /**
-  * @brief  GPIO configuration
-  * @param  None
-  * @retval None
-  */
-static void APP_GpioConfig(void)
-{
-  GPIO_InitTypeDef  GPIO_InitStruct;
-
-  __HAL_RCC_GPIOA_CLK_ENABLE();                          /* Enable GPIOA clock */
-
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
-  GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */  
-  /* GPIO Initialization */
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);    
-}
-
-/**
   * @brief  System clock configuration function
   * @param  None
   * @retval None
@@ -260,9 +239,9 @@ static void APP_SystemClockConfig(void)
 
   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
-  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
-  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

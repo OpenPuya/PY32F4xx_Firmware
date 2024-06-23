@@ -36,7 +36,7 @@
 TIM_HandleTypeDef    TimHandle, htim3;
 TIM_SlaveConfigTypeDef   sSlaveConfig;
 TIM_MasterConfigTypeDef sMasterConfig;
-TIM_OC_InitTypeDef sConfig;
+
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/

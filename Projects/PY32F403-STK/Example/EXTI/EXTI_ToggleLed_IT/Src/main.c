@@ -33,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-GPIO_InitTypeDef  GPIO_InitStruct;
+GPIO_InitTypeDef  GPIO_InitStruct = {0};
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -108,7 +108,7 @@ static void APP_SystemClockConfig(void)
   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* HCLK not divided: PCLK1=HCLK */
   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* HCLK divided by 2: PCLK2=HCLK/2 */
   /* Set clock source */
-  if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_5) != HAL_OK)
+  if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {
     APP_ErrorHandler();
   }

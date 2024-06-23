@@ -49,17 +49,9 @@ int main(void)
   /* Reset of all peripherals, Initializes the Systick */
   HAL_Init();
   
-  /* System clock configuration */
+  /* System clock configuration PVD Need to Enable LSI */
   APP_SystemClockConfig(); 
-  
-  /* Enable LSI clock */
-  __HAL_RCC_LSI_ENABLE();    
-
-  /* Wait until LSI READY is set */
-  while (READ_BIT(RCC->CSR, RCC_CSR_LSIRDY) == 0U)
-  {
-  }
-  
+    
   /* Initialize LED */
   BSP_LED_Init(LED_GREEN);
   
@@ -68,13 +60,13 @@ int main(void)
   sConfigPVD.PVDLevel=PWR_PVDLEVEL_6;                   /* PVD voltage level: 3.0V */
   /* Configure PVD */
   HAL_PWR_ConfigPVD(&sConfigPVD);
-  
-  /* Enable PVD */
-  HAL_PWR_EnablePVD();
 
   HAL_NVIC_SetPriority(PVD_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(PVD_IRQn);
   
+  /* Enable PVD */
+  HAL_PWR_EnablePVD();
+
   while (1)
   {
   }
@@ -115,7 +107,7 @@ static void APP_SystemClockConfig(void)
   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Disable LSE */
 /* OscInitstruct.LSEDriver       = RCC_LSEDRIVE_HIGH; */                    /* Drive capability level: High */
-  OscInitstruct.LSIState        = RCC_LSI_OFF;                              /* Disable LSI */
+  OscInitstruct.LSIState        = RCC_LSI_ON;                               /* Enable LSI */
   OscInitstruct.PLL.PLLState    = RCC_PLL_OFF;                              /* Disable PLL */
 /*  OscInitstruct.PLL.PLLSource   = RCC_PLLSOURCE_HSE; */                   /* PLL clock source: HSE */
 /*  OscInitstruct.PLL.PLLMUL      = RCC_PLL_MUL6; */                        /* PLL multiplication factor: 6 */
@@ -129,7 +121,7 @@ static void APP_SystemClockConfig(void)
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock divided by 2 */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

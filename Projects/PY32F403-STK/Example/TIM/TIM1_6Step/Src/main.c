@@ -73,7 +73,7 @@ int main(void)
   sConfig1.OCMode       = TIM_OCMODE_TIMING;                          /* OCMode：Frozen */
   sConfig1.OCPolarity   = TIM_OCPOLARITY_HIGH;                        /* Compare output polarity: HIGH */
   sConfig1.OCNPolarity  = TIM_OCNPOLARITY_HIGH;                       /* Compare complementary output polarity: HIGH */
-  sConfig1.OCIdleState  = TIM_OCNIDLESTATE_RESET;                     /* Output Idle state: LOW */
+  sConfig1.OCIdleState  = TIM_OCIDLESTATE_RESET;                      /* Output Idle state: LOW */
   sConfig1.OCNIdleState = TIM_OCNIDLESTATE_RESET;                     /* Complementary output Idle state: LOW */
   sConfig1.OCFastMode   = TIM_OCFAST_DISABLE;                         /* Output Compare fast disable */
   /* Set the pulse value for channel 1：500 */
@@ -185,7 +185,7 @@ void HAL_TIMEx_CommutCallback(TIM_HandleTypeDef *htim)
     /* Start channel 2N */
     HAL_TIMEx_OCN_Start(&TimHandle, TIM_CHANNEL_2);
     
-    /* Stop channle 3N */
+    /* Stop channel 3N */
     HAL_TIMEx_OCN_Stop(&TimHandle, TIM_CHANNEL_3);
 
     uwStep++;

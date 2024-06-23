@@ -138,7 +138,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,PY32F403xD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\BSP\PY32F403xx_Start_Kit;..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\Drivers\CMSIS\Device\PUYA\PY32F4xx\Include;..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Inc</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\BSP\PY32F403xx_Start_Kit;..\..\..\..\..\..\Drivers\CMSIS\Include;..\..\..\..\..\..\Drivers\CMSIS\Device\PUYA\PY32F403\Include;..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,9 +388,9 @@
               <FilePath>.\startup_py32f403xx.s</FilePath>
             </File>
             <File>
-              <FileName>system_py32f4xx.c</FileName>
+              <FileName>system_py32f403.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Src\system_py32f4xx.c</FilePath>
+              <FilePath>..\Src\system_py32f403.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -403,14 +403,14 @@
               <FilePath>..\Src\main.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_msp.c</FileName>
+              <FileName>py32f403_hal_msp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Src\py32f4xx_hal_msp.c</FilePath>
+              <FilePath>..\Src\py32f403_hal_msp.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_it.c</FileName>
+              <FileName>py32f403_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Src\py32f4xx_it.c</FilePath>
+              <FilePath>..\Src\py32f403_it.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -425,62 +425,62 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Drivers/PY32F4xx_HAL_Driver</GroupName>
+          <GroupName>Drivers/PY32F403_HAL_Driver</GroupName>
           <Files>
             <File>
-              <FileName>py32f4xx_hal.c</FileName>
+              <FileName>py32f403_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_rcc.c</FileName>
+              <FileName>py32f403_hal_rcc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_rcc.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_rcc.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_rcc_ex.c</FileName>
+              <FileName>py32f403_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_rcc_ex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_rcc_ex.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_gpio.c</FileName>
+              <FileName>py32f403_hal_gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_gpio.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_gpio.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_dma.c</FileName>
+              <FileName>py32f403_hal_dma.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_dma.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_dma.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_pwr.c</FileName>
+              <FileName>py32f403_hal_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_pwr.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_pwr.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_pwr_ex.c</FileName>
+              <FileName>py32f403_hal_pwr_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_pwr_ex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_pwr_ex.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_uart.c</FileName>
+              <FileName>py32f403_hal_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_uart.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_uart.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_cortex.c</FileName>
+              <FileName>py32f403_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_cortex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_cortex.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_tim.c</FileName>
+              <FileName>py32f403_hal_tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_tim.c</FilePath>
             </File>
             <File>
-              <FileName>py32f4xx_hal_tim_ex.c</FileName>
+              <FileName>py32f403_hal_tim_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\PY32F4xx_HAL_Driver\Src\py32f4xx_hal_tim_ex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\PY32F403_HAL_Driver\Src\py32f403_hal_tim_ex.c</FilePath>
             </File>
           </Files>
         </Group>

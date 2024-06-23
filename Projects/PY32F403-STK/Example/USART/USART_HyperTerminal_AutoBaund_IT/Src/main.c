@@ -40,7 +40,6 @@
 UART_HandleTypeDef UartHandle;
 uint8_t aTxBuffer[] = "Auto BaudRate Test";
 uint8_t aRxBuffer[RXBUFFERSIZE];
-uint8_t submitsum = 0;
 
 /* Private user code ---------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -88,7 +87,7 @@ int main(void)
   * @param  None
   * @retval None
   */
-void APP_UsartConfig(void)
+static void APP_UsartConfig(void)
 {
   /* Initialize USART2 */
   UartHandle.Instance          = USART2;
@@ -98,6 +97,7 @@ void APP_UsartConfig(void)
   UartHandle.Init.Parity       = UART_PARITY_NONE;
   UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
   UartHandle.Init.Mode         = UART_MODE_TX_RX;
+  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
 
   UartHandle.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_AUTOBAUDRATE_INIT;
   UartHandle.AdvancedInit.AutoBaudRateEnable = UART_ADVFEATURE_AUTOBAUDRATE_ENABLE; /* Enable Auto Baud Rate detection */
@@ -148,7 +148,7 @@ static void APP_SystemClockConfig(void)
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock divided by 2 */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

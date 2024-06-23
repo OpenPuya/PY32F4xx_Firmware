@@ -55,7 +55,7 @@ static void APP_SystemClockConfig(void);
   */
 int main(void)
 {
-  uint32_t i;
+  uint32_t i = 0;
   /* Reset of all peripherals, Initializes the Systick. */
   HAL_Init();
   
@@ -69,7 +69,7 @@ int main(void)
   CanfdHandle.Instance                      = CANFD;
   CanfdHandle.Init.FrameFormat              = CANFD_FRAME_CLASSIC;
   CanfdHandle.Init.Mode                     = CANFD_MODE_NORMAL;
-//  CanfdHandle.Init.CANFDProtocol            = CANFD_FD_ISO_11898;
+  /* CanfdHandle.Init.CANFDProtocol            = CANFD_FD_ISO_11898; */
   CanfdHandle.Init.Prescaler                = 1U; 
   CanfdHandle.Init.NominalSyncJumpWidth     = 16U;/* 250KHz */
   CanfdHandle.Init.NominalTimeSeg1          = 64U;
@@ -158,8 +158,8 @@ static void APP_SystemClockConfig(void)
   
   OscInitstruct.OscillatorType  = RCC_OSCILLATORTYPE_HSE | RCC_OSCILLATORTYPE_HSI | RCC_OSCILLATORTYPE_LSE | 
                                   RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_HSI48M;
-  OscInitstruct.HSEState        = RCC_HSE_OFF;                              /* Close HSE */
-/* OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz; */                     /* Choose HSE frequency of 16-32MHz */
+  OscInitstruct.HSEState        = RCC_HSE_ON;                               /* Enable HSE */
+  OscInitstruct.HSEFreq         = RCC_HSE_16_32MHz;                         /* HSE frequency of 16-32MHz */
   OscInitstruct.HSI48MState     = RCC_HSI48M_OFF;                           /* Close HSI48M */
   OscInitstruct.HSIState        = RCC_HSI_ON;                               /* Enable HSI */
   OscInitstruct.LSEState        = RCC_LSE_OFF;                              /* Close LSE */
@@ -175,7 +175,7 @@ static void APP_SystemClockConfig(void)
   }
   
   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
-  ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock selection HSI */
+  ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSE;                 /* System clock selection HSE */
   ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
   ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
   ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */

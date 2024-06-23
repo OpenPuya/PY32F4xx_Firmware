@@ -92,7 +92,7 @@ int main(void)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-  aADCxConvertedData = hadc->Instance->DR;
+  aADCxConvertedData = HAL_ADC_GetValue(hadc);
   printf("Channel4 : %u\n\r",(unsigned int)aADCxConvertedData);
 }
 

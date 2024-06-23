@@ -51,7 +51,6 @@ QueueHandle_t MutexSemphoreHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 static void APP_SystemClockConfig(void);
-static void APP_GpioConfig(void);
 static void Task1(void *pvParamters);
 static void Task2(void *pvParamters);
 static void Task3(void *pvParamters);
@@ -71,9 +70,6 @@ int main(void)
 
   /* Initialize UART */	
   BSP_USART_Config();
-
-  /* GPIO configuration */
-  APP_GpioConfig();
 
   /* Create semaphore */
   SemaphoreCreate();
@@ -98,7 +94,7 @@ static void Task1(void *pvParamters)
   {
 #if (SEMAPHORE_BINRAY)
     static uint8_t CountValue = 0;
-    BaseType_t Err;
+    BaseType_t Err = 0;
     {
       /* If CountValue = 10,prepare give binary semaphore */
       if(CountValue == 10)
@@ -111,12 +107,12 @@ static void Task1(void *pvParamters)
           /* Err = pdPASS,give success. */
           if(Err == pdPASS)
           {
-            printf("binary semphore give success!\r\n");
+            printf("Task1: binary semphore give success!\r\n");
           }
           /* Err = pdFAULT,give fail. */
           else
           {
-            printf("binary semphore give fail! binary semphore = 1\r\n");
+            printf("Task1: binary semphore give fail! binary semphore = 1\r\n");
           }
         }
       }
@@ -126,12 +122,12 @@ static void Task1(void *pvParamters)
         /* If CountValue = 11,set CountValue = 0 */
         CountValue = 0;
       }
-      /* vTaskDelay(200): Blocking delay,This Task1 goes into a blocked state after invocation */
+      /* vTaskDelay(200): Blocking delay,Task1 goes into a blocked state after invocation */
       vTaskDelay(200);
     }
 #elif (SEMAPHORE_COUNT) 
     static uint8_t CountValue = 0;
-    BaseType_t Err;
+    BaseType_t Err = 0;
     {
       /* If CountValue = 10,prepare send count semaphore */
       if(CountValue == 10)
@@ -144,12 +140,12 @@ static void Task1(void *pvParamters)
           /* Err = pdPASS,give success. */
           if(Err == pdPASS)
           {
-            printf("count semphore send success!\r\n");
+            printf("Task1: count semphore send success!\r\n");
           }
           /* Err = pdFAULT,give fail,queue is full. */
           else
           {
-            printf("count semphore send fail! binary semphore = %d \r\n",COUNT_MAX);
+            printf("Task1: count semphore send fail! count semphore = %d \r\n",COUNT_MAX);
           }
         }
       }
@@ -159,25 +155,25 @@ static void Task1(void *pvParamters)
       {
         CountValue = 0;
       }
-      /* vTaskDelay(200): Blocking delay,This Task1 goes into a blocked state after invocation */
+      /* vTaskDelay(200): Blocking delay,Task1 goes into a blocked state after invocation */
       vTaskDelay(200);
     }
 #elif (SEMAPHORE_MUTEX)
     {
-      printf("low task take semaphore!\r\n");
+      printf("Task1: low task take semaphore!\r\n");
       /* Take mutex semaphore. portMAX_DELAY: don't get the data you want, keep waiting, task enters the blocked state. */
       xSemaphoreTake(MutexSemphoreHandle, portMAX_DELAY);
-      printf("low task is running!\r\n");
+      printf("Task1: low task is running!\r\n");
       HAL_Delay(3000);
-      printf("low task give semaphore!\r\n");
+      printf("Task1: low task give semaphore!\r\n");
       /* Give mutex semaphore. */
       xSemaphoreGive(MutexSemphoreHandle);
-      /* vTaskDelay(1000): Blocking delay,This Task1 goes into a blocked state after invocation */
+      /* vTaskDelay(1000): Blocking delay,Task1 goes into a blocked state after invocation */
       vTaskDelay(1000);
     }
 #else
     {
-      printf("task_flag falult!");
+      printf("Task1: task_flag falult!");
     }
 #endif
   }
@@ -200,7 +196,7 @@ static void Task2(void *pvParamters)
       /* Err = pdTRUE,take success. */
       if(Err == pdTRUE)
       {
-        printf("binary semphore take success!\r\n");
+        printf("Task2: binary semphore take success!\r\n");
       }
     }
 #elif (SEMAPHORE_COUNT)
@@ -212,20 +208,20 @@ static void Task2(void *pvParamters)
       if(Err == pdTRUE)
       {
         /* Use uxSemaphoreGetCount() output count semaphore value */
-        printf("count semphore = %d\r\n",(int)uxSemaphoreGetCount(CountSemphoreHandle));
+        printf("Task2: count semphore = %d\r\n",(int)uxSemaphoreGetCount(CountSemphoreHandle));
       }
-      /* vTaskDelay(1000): Blocking delay,This Task1 goes into a blocked state after invocation */
+      /* vTaskDelay(1000): Blocking delay,Task2 goes into a blocked state after invocation */
       vTaskDelay(1000);
     }
 #elif (SEMAPHORE_MUTEX)
     {
-      printf("middle task is running!\r\n");
+      printf("Task2: middle task is running!\r\n");
     }
-    /* vTaskDelay(1000): Blocking delay,This Task2 goes into a blocked state after invocation */
+    /* vTaskDelay(1000): Blocking delay,Task2 goes into a blocked state after invocation */
     vTaskDelay(1000);
 #else
     {
-      printf("Error Unknown Semapore!");
+      printf("Task2: Error Unknown Semapore!");
     }
 #endif
   }
@@ -242,21 +238,21 @@ static void Task3(void *pvParamters)
   {
 #if (SEMAPHORE_MUTEX)
     {
-      printf("high task get semaphore!\r\n");
+      printf("Task3: high task get semaphore!\r\n");
       /* Take mutex semaphore. */
       /* portMAX_DELAY: don't get the data you want, keep waiting, task enters the blocked state. */
       xSemaphoreTake(MutexSemphoreHandle, portMAX_DELAY);
-      printf("high task is running!\r\n");
+      printf("Task3: high task is running!\r\n");
       HAL_Delay(500);
-      printf("high task release semaphore!\r\n");
+      printf("Task3: high task release semaphore!\r\n");
       /* Give mutex semaphore. */
       xSemaphoreGive(MutexSemphoreHandle);
-      /* vTaskDelay(1000): Blocking delay,This Task3 goes into a blocked state after invocation */
+      /* vTaskDelay(1000): Blocking delay,Task3 goes into a blocked state after invocation */
       vTaskDelay(1000);
     }
 #else
     {
-      printf("task3 underuse, delete!\r\n");
+      printf("Task3 underuse, delete!\r\n");
       /* Delet Task3 */
       vTaskDelete(NULL);
     }
@@ -311,25 +307,6 @@ static void SemaphoreCreate(void)
 }
 
 /**
-  * @brief  GPIO configuration
-  * @param  None
-  * @retval None
-  */
-static void APP_GpioConfig(void)
-{
-  GPIO_InitTypeDef  GPIO_InitStruct;
-
-  __HAL_RCC_GPIOA_CLK_ENABLE();                          /* Enable GPIOA clock */
-
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;            /* Push-pull output */
-  GPIO_InitStruct.Pull = GPIO_PULLUP;                    /* Enable pull-up */
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;          /* GPIO speed */  
-  /* GPIO Initialization */
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);    
-}
-
-/**
   * @brief  System clock configuration function
   * @param  None
   * @retval None
@@ -359,9 +336,9 @@ static void APP_SystemClockConfig(void)
   
   ClkInitstruct.ClockType       = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
   ClkInitstruct.SYSCLKSource    = RCC_SYSCLKSOURCE_HSI;                 /* System clock source: HSI */
-  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock not divided */
-  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock not divided */
-  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB1 clock divided by 2 */
+  ClkInitstruct.AHBCLKDivider   = RCC_SYSCLK_DIV1;                      /* AHB clock 1 division */
+  ClkInitstruct.APB1CLKDivider  = RCC_HCLK_DIV1;                        /* APB1 clock 1 division */
+  ClkInitstruct.APB2CLKDivider  = RCC_HCLK_DIV2;                        /* APB2 clock 2 division */
   /* Configure Clocks */
   if(HAL_RCC_ClockConfig(&ClkInitstruct, FLASH_LATENCY_0) != HAL_OK)
   {

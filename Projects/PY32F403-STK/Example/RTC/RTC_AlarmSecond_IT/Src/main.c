@@ -60,6 +60,7 @@ int main(void)
   /* RTC initialization */
   RtcHandle.Instance = RTC;                       /* Select RTC */
   RtcHandle.Init.AsynchPrediv = RTC_AUTO_1_SECOND; /* RTC one second time base automatic calculation */
+  RtcHandle.Init.OutPut = RTC_OUTPUTSOURCE_NONE;   /* No output on the TAMPER pin */
   if (HAL_RTC_Init(&RtcHandle) != HAL_OK)
   {
     APP_ErrorHandler();
@@ -85,15 +86,25 @@ void HAL_RTCEx_RTCEventCallback(RTC_HandleTypeDef *hrtc)
 }
 
 /**
+  * @brief  Alarm interrupt callback function
+  * @param  hrtc：RTC handle
+  * @retval None
+  */
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
+{
+  printf("RTC_IT_ALARM\r\n");
+}
+
+/**
   * @brief  RTC alarm clock configuration
   * @param  None
   * @retval None
   */
 static void APP_RtcAlarmConfig(void)
 {
-  RTC_DateTypeDef  sdatestructure;
-  RTC_TimeTypeDef  stimestructure;
-  RTC_AlarmTypeDef salarmstructure;
+  RTC_DateTypeDef  sdatestructure = {0};
+  RTC_TimeTypeDef  stimestructure = {0};
+  RTC_AlarmTypeDef salarmstructure = {0};
 
   /* Set date: Tuesday, May 21, 2021 */
   sdatestructure.Year = 0x21;
@@ -131,8 +142,8 @@ static void APP_RtcAlarmConfig(void)
   */
 static void APP_RtcTimeShow(void)
 {
-  RTC_DateTypeDef sdatestructureget;
-  RTC_TimeTypeDef stimestructureget;
+  RTC_DateTypeDef sdatestructureget = {0};
+  RTC_TimeTypeDef stimestructureget = {0};
   
   /*Display RTC current time*/
   HAL_RTC_GetTime(&RtcHandle, &stimestructureget, RTC_FORMAT_BIN);

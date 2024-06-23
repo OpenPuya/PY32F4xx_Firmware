@@ -11,7 +11,6 @@ This sample demonstrates the PVD (Programmable Voltage Detector) voltage
 detection functionality. When the supply voltage is lower than 3.0V, the 
 LED will light up. When the supply voltage is higher than 3.0V, the LED 
 will turn off.
-
 ================================================================================
 测试环境：
 测试用板：PY32F403_STK
@@ -24,7 +23,6 @@ Test board: PY32F403_STK
 MDK Version: 5.28
 IAR Version: 9.20
 GCC Version: GNU Arm Embedded Toolchain 10.3-2021.10
-
 ================================================================================
 使用步骤：
 1. 编译下载程序到MCU，并运行；
@@ -37,7 +35,6 @@ Example execution steps:
    light up;
 3. Adjust the supply voltage of the MCU to be higher than 3.0V, the LED will 
    turn off.
-
 ================================================================================
 注意事项：
 

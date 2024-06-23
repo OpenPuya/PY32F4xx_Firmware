@@ -3,16 +3,17 @@
                              Sample Description
 ================================================================================
 功能描述:
-此样例是对串口外设接口（SPI）与外部设备以全双工串行方式进行通信的演示,此接口设
-置为主模式，为外部从设备提供通信时钟SCK。主机通过MOSI引脚发送数据,从MISO引脚接收
-从机的数据，数据以主机提供的SCK沿同步被移位，完成全双工通信。
+此样例是利用DMA对串口外设接口（SPI）与外部设备以全双工串行方式进行通信的演示，
+主设备提供通信时钟SCK，通过MOSI/MISO引脚发送/接收数据。从设备通过MOSI/MISO引脚接
+收/发送数据。数据以主机提供的SCK沿同步被移位，完成全双工通信。
 
 Function descriptions:
-This example demonstrates that SPI communicates with external devices in full 
-duplex serial mode.This interface is set in master mode to provide communication 
-clock SCK for external and slave devices.The host sends data through the MOSI 
-pin, receives data from the MISO pin, and the data is shifted synchronously 
-along the SCK provided by the host, completing the full-duplex communication.
+This sample is a demonstration of using DMA to communicate with a serial 
+peripheral interface (SPI) and an external device in full-duplex serial mode. 
+The master device provides the communication clock SCK and sends/receives data 
+through the MOSI/MISO pin. The slave device receives/transmits data through the 
+MOSI/MISO pins. The data is shifted synchronously along the SCK provided by the 
+master to complete full-duplex communication.
 ================================================================================
 测试环境：
 测试用板：PY32F403_STK
@@ -28,7 +29,7 @@ GCC Version: GNU Arm Embedded Toolchain 10.3-2021.10
 ================================================================================
 使用步骤:
 1.选择两块PY32F403_STK板，一块作为主机，一块作为从机
-2.编译下载主机程序（本样例程序）
+2.编译下载主机程序SPI_TwoBoards_FullDuplexMaster_DMA
 3.编译下载从机程序SPI_TwoBoards_FullDuplexSlave_DMA
 4.主机与从机引脚连接(箭头指向为信号传输方向) 
 主机MASTER：         从机SLAVE：
@@ -43,7 +44,7 @@ NSS(PA15)  ----->    NSS(PA15)
 
 Example execution steps:
 1. Select two PY32F403_STK boards, one as the host and the other as the slave
-2. Compile and download the host program (this sample program)
+2. Compile and download the host program: SPI_TwoBoards_FullDuplexMaster_DMA
 3. Compile and download slave program: SPI_TwoBoards_FullDuplexSlave_DMA
 4. The host is connected to the SLAVE pin (the arrow points in the signal 
 transmission direction).
