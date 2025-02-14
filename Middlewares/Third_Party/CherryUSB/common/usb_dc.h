@@ -164,7 +164,14 @@ void usbd_event_ep_in_complete_handler(uint8_t ep, uint32_t nbytes);
  * @param[in]  nbytes    How many nbytes have transferred.
  */
 void usbd_event_ep_out_complete_handler(uint8_t ep, uint32_t nbytes);
-
+/**
+ * @brief Set the flag that ep0 send zero packet.
+ */
+void usbd_ep0_set_zlp_flag(void);
+/**
+ * @brief Reset the flag that ep0 send zero packet.
+ */
+void usbd_ep0_reset_zlp_flag(void);
 /**
  * @}
  */

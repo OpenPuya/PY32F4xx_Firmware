@@ -109,7 +109,7 @@
   },
   "outDir": "build",
   "deviceName": "PY32F403xD",
-  "packDir": ".pack/Puya/PY32F4xx_DFP.1.0.0",
+  "packDir": "../../../../../../Pack/GCC/.pack/Puya/PY32F4xx_DFP",
   "miscInfo": {
     "uid": "36bcf0031e18a3008bbdaa90a96a7987"
   },

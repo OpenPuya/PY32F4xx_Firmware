@@ -1,0 +1,11 @@
+[FilePath]
+0=../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_ll_utils.c
+[FileName]
+0=py32f403_ll_utils.c
+[Define]
+0=PY32F403xD
+1=USE_FULL_LL_DRIVER
+2=USE_FULL_ASSERT
+[User]
+0=../Src/main.c
+1=../Src/py32f403_it.c

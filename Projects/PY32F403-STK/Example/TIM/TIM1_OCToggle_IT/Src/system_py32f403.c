@@ -84,6 +84,135 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
   * @{
   */
 
+void APP_ErrorProc(void)
+{
+  HAL_NVIC_SystemReset();
+}
+
+/**
+  * @brief  Load trim.
+  * @param  None
+  * @retval None
+  */
+void APP_LoadTrim(void)
+{
+  uint32_t OPTAddr[]={0x1FFF5110,0x1FFF5114,0x1FFF5118,0x1FFF5148,0x1FFF514C,0x1FFF5600,0x1FFF5604,0x1FFF5200,0x1FFF5204,\
+                      0x1FFF5140,0x1FFF5144,0x1FFF5208,0x1FFF5120,0x1FFF5124,0x1FFF5128,0x1FFF512C,0x1FFF5130,0x1FFF5134};
+  uint32_t OPTValue[18] = {0};
+  uint32_t RegAddr[]={0x40022208,0x4002220C,0x40022220,0x40022228,0x40022224,0x4002221C,0x4002222C,0x40022210,0x40022214,0x40022218};
+  uint32_t RegMask[]={0x0FFF0FFF,0x000000FF,0x001F000F,0x1FFF07FF,0x07FF07FF,0x003F003F,0x0000003F,0xFFFFFFFF,0xFFFFFFFF,0x0FFF0FFF};
+  uint32_t RegValue[10] = {0};
+  uint32_t i = 0;
+  uint32_t j = 0;
+  uint32_t temp = 0;
+  
+  /* Enable FLASH_KEYR */
+  *((__IO uint32_t *)(0x40022008)) = 0x45670123;
+  *((__IO uint32_t *)(0x40022008)) = 0xcdef89ab;
+  /* Enable FLASH_OPTKEYR */
+  *((__IO uint32_t *)(0x4002200c)) = 0x08192A3B;
+  *((__IO uint32_t *)(0x4002200c)) = 0x4C5D6E7F;
+  /* Enable FLASH_TESTKEYR */
+  *((__IO uint32_t *)(0x4002228c)) = 0x5D7F4051;
+  *((__IO uint32_t *)(0x4002228c)) = 0x46CE2763;
+  
+  /*********************************************/
+  for (i=0; i < 18; i++)
+  {
+    j=3;
+    do
+    {
+      temp = READ_REG(*((__IO uint32_t *)(OPTAddr[i])));
+      if ((temp >> 16U) == ((~temp) & 0xFFFFU))
+      {
+        OPTValue[i] = temp;
+      break;
+      }      
+    }while(--j);
+
+    if(j == 0)
+    {
+      APP_ErrorProc();
+    }
+  }
+  
+  /*(1) 0x40022208*/
+  RegValue[0] = (OPTValue[0] & 0x0FFF) | ((OPTValue[1] & 0x0FFF) << 16);
+  
+  /*(2) 0x4002220C*/
+  RegValue[1] = (OPTValue[2] & 0x00FF);
+  
+  /*(3) 0x40022220*/
+  RegValue[2] = (OPTValue[3] & 0x000F) | ((OPTValue[4] & 0x001F) << 16);
+  
+  /*(4) 0x40022228*/
+  RegValue[3] = (OPTValue[5] & 0x07FF) | ((OPTValue[6] & 0x1FFF) << 16);
+  
+  /*(5) 0x40022224*/
+  RegValue[4] = (OPTValue[7] & 0x07FF) | ((OPTValue[8] & 0x07FF) << 16);
+  
+  /*(6) 0x4002221C*/
+  RegValue[5] = (OPTValue[9] & 0x003F) | ((OPTValue[10] & 0x003F) << 16);
+  
+  /*(7) 0x4002222C*/
+  RegValue[6] = (OPTValue[11] & 0x003F);
+  
+  /*(8) 0x40022210*/
+  RegValue[7] = (OPTValue[12] & 0xFFFF) | ((OPTValue[13] & 0xFFFF) << 16);
+  
+  /*(9) 0x40022214*/
+  RegValue[8] = (OPTValue[14] & 0xFFFF) | ((OPTValue[15] & 0xFFFF) << 16);
+  
+  /*(10) 0x40022218*/
+  RegValue[9] = (OPTValue[16] & 0x0FFF) | ((OPTValue[17] & 0x0FFF) << 16);
+  
+  for(i=0; i < 10;i++)
+  {
+    temp = READ_REG(*((__IO uint32_t *)(RegAddr[i])));
+    if (RegValue[i] != (temp & RegMask[i]))
+    {
+      MODIFY_REG(*((__IO uint32_t *)(RegAddr[i])), RegMask[i], RegValue[i]);
+    }
+  }
+  
+  /*********************************************/
+  
+  /* Enable TRIM update */
+  *((__IO uint32_t *)(0x40022200)) |= 0x01;
+  
+  /* Wait ten nop delays */
+  __NOP();
+  __NOP();
+  __NOP();
+  __NOP();
+  __NOP();
+  __NOP();
+  __NOP();
+  __NOP();
+  __NOP();
+  __NOP();
+  
+  /* Disable TRIM update */
+  *((__IO uint32_t *)(0x40022200)) &= (~0x01);
+  
+  for(i=0; i < 10;i++)
+  {
+    temp = READ_REG(*((__IO uint32_t *)(RegAddr[i])));
+    if (RegValue[i] != (temp & RegMask[i]))
+    {
+      APP_ErrorProc();
+    }
+  }
+  
+  /* Disable FLASH_OPTKEYR、FLASH_TESTKEYR */
+  *((__IO uint32_t *)(0x40022014)) |= 0x40000000;
+  
+  /* Disable FLASH_KEYR、FLASH_TESTKEYR */
+  *((__IO uint32_t *)(0x40022014)) |= 0x80000000;
+  
+}
+
+
 /**
   * @brief  Setup the microcontroller system
   *         Initialize the FPU setting, vector table location and External memory 
@@ -93,9 +222,13 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
   */
 void SystemInit(void)
 {
+  /* Load trim */
+  APP_LoadTrim();
+  
 #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
   SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
 #endif
+
   /* Configure the Vector Table location add offset address ------------------*/
 #ifdef VECT_TAB_SRAM
   SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
@@ -125,11 +258,11 @@ void SystemInit(void)
   *           - If SYSCLK source is PLL, SystemCoreClock will contain the HSE_VALUE(**) 
   *             or HSI_VALUE(*) multiplied/divided by the PLL factors.
   *         
-  *         (*) HSI_VALUE is a constant defined in PY32F403_hal_conf.h file (default value
+  *         (*) HSI_VALUE is a constant defined in py32f403_hal_conf.h file (default value
   *             8 MHz) but the real value may vary depending on the variations
   *             in voltage and temperature.   
   *    
-  *         (**) HSE_VALUE is a constant defined in PY32F403_hal_conf.h file (its value
+  *         (**) HSE_VALUE is a constant defined in py32f403_hal_conf.h file (its value
   *              depends on the application requirements), user has to ensure that HSE_VALUE
   *              is same as the real frequency of the crystal used. Otherwise, this function
   *              may have wrong result.

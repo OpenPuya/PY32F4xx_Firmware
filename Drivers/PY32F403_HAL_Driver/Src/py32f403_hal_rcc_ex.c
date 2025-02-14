@@ -373,7 +373,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
       {
         frequency = HSI48_VALUE;
       }
-      else if(((temp_reg & RCC_USBCLKSOURCE_HSI48M) != RCC_USBCLKSOURCE_HSI48M) && (HAL_IS_BIT_SET(RCC->CR, RCC_CR_PLLRDY)))
+      else if(((temp_reg & RCC_USBCLKSOURCE_HSI48M) != RCC_USBCLKSOURCE_HSI48M) && (HAL_IS_BIT_SET(RCC->CR, RCC_CR_PLLON)))
       {
         tmpreg = RCC->CFGR;
         pllmul = aPLLMULFactorTable[(((tmpreg&(RCC_CFGR_PLLMULL_4|RCC_CFGR_PLLMULL_5))>>7) | (tmpreg&(RCC_CFGR_PLLMULL_0| \
@@ -386,8 +386,8 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
         }
         else
         {
-          /* HSI used as PLL clock source : PLLCLK = HSI/2 * PLLMUL */
-          pllclk = (uint32_t)((HSI_VALUE >> 1) * pllmul);
+          /* HSI used as PLL clock source : PLLCLK = HSI * PLLMUL */
+          pllclk = (uint32_t)(HSI_VALUE * pllmul);
         }
 
         usbprediv = __HAL_RCC_GET_USB_SOURCE();
@@ -456,7 +456,7 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
       }
       else
       {
-        if(HAL_IS_BIT_SET(RCC->CR, RCC_CR_PLLRDY))
+        if(HAL_IS_BIT_SET(RCC->CR, RCC_CR_PLLON))
         {
           /* PLL / CANPLLDIV */
           tmpreg = RCC->CFGR;
@@ -470,8 +470,8 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
           }
           else
           {
-            /* HSI used as PLL clock source : PLLCLK = HSI/2 * PLLMUL */
-            pllclk = (uint32_t)((HSI_VALUE >> 1) * pllmul);
+            /* HSI used as PLL clock source : PLLCLK = HSI * PLLMUL */
+            pllclk = (uint32_t)(HSI_VALUE * pllmul);
           }
           
           frequency = (pllclk / ((__HAL_RCC_GET_CAN_SOURCE() >> RCC_CFGR2_CANCKSEL_Pos) + 1));

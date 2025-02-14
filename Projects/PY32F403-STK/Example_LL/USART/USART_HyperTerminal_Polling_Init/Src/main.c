@@ -1,0 +1,280 @@
+/**
+  ******************************************************************************
+  * @file    main.c
+  * @author  MCU Application Team
+  * @brief   Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2023 Puya Semiconductor Co.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by Puya under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; Copyright (c) 2016 STMicroelectronics.
+  * All rights reserved.</center></h2>
+  *
+  * This software component is licensed by ST under BSD 3-Clause license,
+  * the "License"; You may not use this file except in compliance with the
+  * License. You may obtain a copy of the License at:
+  *                        opensource.org/licenses/BSD-3-Clause
+  *
+  ******************************************************************************
+  */
+
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+#include "py32f403xx_ll_Start_Kit.h"
+
+/* Private define ------------------------------------------------------------*/
+#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
+#define TXSTARTMESSAGESIZE    (COUNTOF(aTxStartMessage) - 1)
+#define TXENDMESSAGESIZE      (COUNTOF(aTxEndMessage) - 1)
+
+/* Private variables ---------------------------------------------------------*/
+uint8_t aRxBuffer[12] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+uint8_t aTxStartMessage[] = "\n\r USART Hyperterminal communication based on polling \n\r Enter 12 characters using keyboard :\n\r";
+uint8_t aTxEndMessage[] = "\n\r Example Finished\n\r";
+
+uint8_t *TxBuff = NULL;
+__IO uint16_t TxCount = 0;
+
+uint8_t *RxBuff = NULL;
+__IO uint16_t RxCount = 0;
+
+/* Private user code ---------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private function prototypes -----------------------------------------------*/
+static void APP_SystemClockConfig(void);
+static void APP_ConfigUsart(void);
+static void APP_UsartTransmit(USART_TypeDef *USARTx, uint8_t *pData, uint16_t Size);
+static void APP_UsartReceive(USART_TypeDef *USARTx, uint8_t *pData, uint16_t Size);
+
+/**
+  * @brief  Main program.
+  * @param  None
+  * @retval int
+  */
+int main(void)
+{
+  /* Enable SYSCFG and PWR clock */
+  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+  
+  /* 3 bits for pre-emption priority, 0 bits for subpriority */
+  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_3);
+  
+  /* Configure Systemclock */
+  APP_SystemClockConfig(); 
+
+  /* Configure LED */
+  BSP_LED_Init(LED_GREEN);
+  
+  /* USART configuration */
+  APP_ConfigUsart();
+  
+  /* Start the transmission process */
+  APP_UsartTransmit(USART2, (uint8_t*)aTxStartMessage, TXSTARTMESSAGESIZE);
+
+  /* receive data */
+  APP_UsartReceive(USART2, (uint8_t *)aRxBuffer, 12);
+
+  /* Transmit data */
+  APP_UsartTransmit(USART2, (uint8_t*)aRxBuffer, 12);
+  
+  /* Send the End Message  */
+  APP_UsartTransmit(USART2, (uint8_t*)aTxEndMessage, TXENDMESSAGESIZE);
+  
+  /* Turn on LED if test passes then enter infinite loop */
+  BSP_LED_On(LED_GREEN);
+  
+  /* Infinite loop */
+  while (1)
+  {
+
+  }
+}
+
+
+/**
+  * @brief  Configure system clock
+  * @param  None
+  * @retval None
+  */
+static void APP_SystemClockConfig(void)
+{
+  /* Enable HSI */
+  LL_RCC_HSI_Enable();
+  while(LL_RCC_HSI_IsReady() != 1)
+  {
+  }
+
+  /* Set AHB prescaler: HCLK = SYSCLK */
+  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
+
+  /* Select HSI as system clock source */
+  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
+  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
+  {
+  }
+
+  /* Set APB1 & APB2 prescaler: PCLK1 = HCLK, PCLK2 = HCLK/2 */
+  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
+  LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_2);
+  
+  /* Set systick to 1ms in using frequency set to 8MHz */
+  LL_Init1msTick(8000000);
+
+  /* Update the SystemCoreClock global variable(which can be updated also through SystemCoreClockUpdate function) */
+  LL_SetSystemCoreClock(8000000);
+}
+
+/**
+  * @brief  USART2 configuration function
+  * @param  None
+  * @retval None
+  */
+static void APP_ConfigUsart(void)
+{
+  /* Enable GPIOA clock */
+  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
+  /* Enable USART2 clock */
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2);
+  
+  /* GPIOA configuration */
+  LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
+  /* Select pin 2 */
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_2;
+  /* Select alternate function mode */
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
+  /* Set output speed */
+  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
+  /* Set output type to push pull */
+  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  /* Enable pull up */
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
+  /* Set alternate function to USART2 function  */
+  GPIO_InitStruct.Alternate = LL_GPIO_AF2_USART2;
+  /* Initialize GPIOA */
+  LL_GPIO_Init(GPIOA,&GPIO_InitStruct);
+  
+  /* Select pin 3 */
+  GPIO_InitStruct.Pin = LL_GPIO_PIN_3;
+  /* Set alternate function to USART2 function  */
+  GPIO_InitStruct.Alternate = LL_GPIO_AF2_USART2;
+  /* Initialize GPIOA */
+  LL_GPIO_Init(GPIOA,&GPIO_InitStruct);
+  
+  /* Set USART feature */
+  LL_USART_InitTypeDef USART_InitStruct = {0};
+  /* Set baud rate */
+  USART_InitStruct.BaudRate = 9600;
+  /* set word length to 8 bits: Start bit, 8 data bits, n stop bits */
+  USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B;
+  /* 1 stop bit */
+  USART_InitStruct.StopBits = LL_USART_STOPBITS_1;
+ /* Parity control disabled  */
+  USART_InitStruct.Parity = LL_USART_PARITY_NONE;
+  USART_InitStruct.TransferDirection = LL_USART_DIRECTION_TX_RX;
+  USART_InitStruct.HardwareFlowControl = LL_USART_HWCONTROL_NONE;
+  USART_InitStruct.OverSampling = LL_USART_OVERSAMPLING_16;
+  /* Initialize USART */
+  LL_USART_Init(USART2, &USART_InitStruct);
+  
+  /* Set mode as full-duplex asynchronous mode */
+  LL_USART_ConfigAsyncMode(USART2);
+  
+  /*Enable USART */
+  LL_USART_Enable(USART2);
+}
+
+/**
+  * @brief  USART transmission function
+  * @param  USARTx：USART Instance，This parameter can be one of the following values:USART1、USART2、USART3、USART4、USART5
+  * @param  pData：Pointer to transmission buffer
+  * @param  Size：Size of transmission buffer
+  * @retval None
+  */
+static void APP_UsartTransmit(USART_TypeDef *USARTx, uint8_t *pData, uint16_t Size)
+{
+  TxBuff = pData;
+  TxCount = Size;
+  
+  /* transmit data */
+  while (TxCount > 0)
+  {
+    /* Wait for TXE bit to be set */
+    while(LL_USART_IsActiveFlag_TXE(USARTx) != 1);
+    /* transmit data */
+    LL_USART_TransmitData8(USARTx, *TxBuff);
+    TxBuff++;
+    TxCount--;
+  }
+  
+  /* Wait for TC bit to be set */
+  while(LL_USART_IsActiveFlag_TC(USARTx) != 1);
+}
+
+/**
+  * @brief  USART receive function
+  * @param  USARTx：USART Instance，This parameter can be one of the following values:USART1、USART2、USART3、USART4、USART5
+  * @param  pData：Pointer to receive buffer
+  * @param  Size：Size of receive buffer
+  * @retval None
+  */
+static void APP_UsartReceive(USART_TypeDef *USARTx, uint8_t *pData, uint16_t Size)
+{
+  RxBuff = pData;
+  RxCount = Size;
+  
+  /* Receive data */
+  while (RxCount > 0)
+  {
+    /* Wait for RxNE bit to be set */
+    while(LL_USART_IsActiveFlag_RXNE(USARTx) != 1);
+    /* Receive data */
+    *RxBuff = LL_USART_ReceiveData8(USARTx);
+    RxBuff++;
+    RxCount--;
+  }
+}
+
+/**
+  * @brief  Error handling function
+  * @param  None
+  * @retval None
+  */
+void APP_ErrorHandler(void)
+{
+  /* Infinite loop */
+  while (1)
+  {
+  }
+}
+
+#ifdef  USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file：Pointer to the source file name
+  * @param  line：assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* User can add His own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* Infinite loop */
+  while (1)
+  {
+  }
+}
+#endif /* USE_FULL_ASSERT */
+
+/************************ (C) COPYRIGHT Puya *****END OF FILE******************/

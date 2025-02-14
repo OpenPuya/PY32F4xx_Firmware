@@ -523,6 +523,9 @@ void HAL_PWR_EnterSTOPMode(uint32_t Regulator, uint8_t STOPEntry)
   */
 void HAL_PWR_EnterSTANDBYMode(void)
 {
+  /* Clear the wake-up flag */
+  __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+
   /* Select Standby mode */
   SET_BIT(PWR->CR, PWR_CR_PDDS);
 

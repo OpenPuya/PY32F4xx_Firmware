@@ -68,6 +68,7 @@ extern "C" {
   */
 #define GPIO_AF0_SWJ           ((uint8_t)0x00)  /*!< SWJ (SWD/JTAG) Alternate Function mapping */
 #define GPIO_AF0_MCO           ((uint8_t)0x00)  /*!< MCO Alternate Function mapping */
+#define GPIO_AF0_TRACE         ((uint8_t)0x00)  /*!< TRACE Alternate Function mapping */
 
 /**
   * @brief   AF 1 selection
@@ -90,6 +91,7 @@ extern "C" {
   */
 #define GPIO_AF3_SPI1          ((uint8_t)0x03U)  /*!< SPI1 Alternate Function mapping */
 #define GPIO_AF3_SPI2          ((uint8_t)0x03U)  /*!< SPI2 Alternate Function mapping */
+#define GPIO_AF3_CTC           ((uint8_t)0x03U)  /*!< CTC Alternate Function mapping */
 
 /**
   * @brief   AF 4 selection
@@ -149,7 +151,6 @@ extern "C" {
   */
 #define GPIO_AF14_I2S1         ((uint8_t)0x0E)  /*!< I2S1 Alternate Function mapping */      
 #define GPIO_AF14_I2S2         ((uint8_t)0x0E)  /*!< I2S2 Alternate Function mapping */
-#define GPIO_AF14_I2S3         ((uint8_t)0x0E)  /*!< I2S3 Alternate Function mapping */
 
 /**
   * @brief   AF 15 selection

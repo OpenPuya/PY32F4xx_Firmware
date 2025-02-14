@@ -124,6 +124,9 @@ static void APP_SystemClockConfig(void)
   */
 void HAL_CTC_CKOKCallback(CTC_HandleTypeDef *CTChadle)
 {
+  /* Stop calibration  */
+  HAL_CTC_Stop_IT(CTChadle);
+  
   /* Turn on LED */
   BSP_LED_On(LED_GREEN);
 }

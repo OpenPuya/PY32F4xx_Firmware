@@ -157,6 +157,14 @@ typedef struct
     __IO uint32_t CALFIR2;     /*!< ADC desc CALFIR2, Address offset: 0x60 */
 }ADC_TypeDef;
 
+typedef struct
+{
+  __IO uint32_t SR;               /*!< ADC status register,    used for ADC multimode (bits common to several ADC instances). Address offset: ADC1 base address         */
+  __IO uint32_t CR1;              /*!< ADC control register 1, used for ADC multimode (bits common to several ADC instances). Address offset: ADC1 base address + 0x04  */
+  __IO uint32_t CR2;              /*!< ADC control register 2, used for ADC multimode (bits common to several ADC instances). Address offset: ADC1 base address + 0x08  */
+  uint32_t  RESERVED[16];
+  __IO uint32_t DR;               /*!< ADC data register,      used for ADC multimode (bits common to several ADC instances). Address offset: ADC1 base address + 0x4C  */
+} ADC_Common_TypeDef;
 /**
 * @brief BKP Registers
 */
@@ -683,6 +691,7 @@ typedef struct
 #define ADC1                                   ((ADC_TypeDef *) ADC1_BASE)
 #define ADC2                                   ((ADC_TypeDef *) ADC2_BASE)
 #define ADC3                                   ((ADC_TypeDef *) ADC3_BASE)
+#define ADC12_COMMON                           ((ADC_Common_TypeDef *)ADC1_BASE)
 #define BKP                                    ((BKP_TypeDef *) BKP_BASE)
 #define CANFD                                  ((CANFD_TypeDef *) CANFD_BASE)
 #define CRC                                    ((CRC_TypeDef *) CRC_BASE)
@@ -745,6 +754,9 @@ typedef struct
 
 
 /*********************  Bits Define For Peripheral ADC  *********************/
+#define ADC_MULTIMODE_SUPPORT                          /*!< ADC feature available only on specific devices: multimode available on devices with several ADC instances */
+
+
 /*!< ADC_SR */
 #define ADC_SR_AWD_Pos                            (0U)
 #define ADC_SR_AWD_Msk                            (0x1UL << ADC_SR_AWD_Pos)                         /*!< 0x00000001 */
@@ -1613,6 +1625,8 @@ typedef struct
 #define BKP_DR42_D_Pos                            (0U)
 #define BKP_DR42_D_Msk                            (0xFFFFUL << BKP_DR42_D_Pos)                      /*!< 0x0000FFFF */
 #define BKP_DR42_D                                BKP_DR42_D_Msk                                    /*!< D[15:0] bits (desc D) */
+
+#define RTC_BKP_NUMBER 42
 
 /*********************  Bits Define For Peripheral CANFD  *********************/
 /*!< CANFD_TSNCR */
@@ -4191,9 +4205,9 @@ unlock the write access to the option byte block */
 
 #define I2C_OAR1_ADD1_7                           0x000000FEU                                       /*!< Interface Address */
 #define I2C_OAR1_ADD8_9                           0x00000300U                                       /*!< Interface Address */
-#define I2C_OAR1_ADD_Pos                          (1U)
-#define I2C_OAR1_ADD_Msk                          (0x1FFUL << I2C_OAR1_ADD_Pos)                     /*!< 0x000003FE */
-#define I2C_OAR1_ADD                              I2C_OAR1_ADD_Msk                                  /*!< ADD[7:1] bits (desc ADD) */
+/* #define I2C_OAR1_ADD_Pos                          (1U)                          */                                                           
+/* #define I2C_OAR1_ADD_Msk                          (0x1FFUL << I2C_OAR1_ADD_Pos) */                    /*!< 0x000003FE */                 
+/* #define I2C_OAR1_ADD                              I2C_OAR1_ADD_Msk              */                    /*!< ADD[7:1] bits (desc ADD) */  
 #define I2C_OAR1_ADDMODE_Pos                      (15U)
 #define I2C_OAR1_ADDMODE_Msk                      (0x1UL << I2C_OAR1_ADDMODE_Pos)                   /*!< 0x00008000 */
 #define I2C_OAR1_ADDMODE                          I2C_OAR1_ADDMODE_Msk                              /*!< desc ADDMODE */
@@ -4839,6 +4853,9 @@ unlock the write access to the option byte block */
 #define ESMC_DATA_DATA3_7                     (0x80UL << ESMC_DATA_DATA3_Pos)
 
 /*********************  Bits Define For Peripheral RCC  *********************/
+#define RCC_PLL_SUPPORT
+#define RCC_LSE_SUPPORT
+
 /*!< RCC_CR */
 #define RCC_CR_HSION_Pos                          (0U)
 #define RCC_CR_HSION_Msk                          (0x1UL << RCC_CR_HSION_Pos)                       /*!< 0x00000001 */
@@ -7769,6 +7786,9 @@ unlock the write access to the option byte block */
 /****************************** ETH Instances ********************************/
 #define IS_ETH_ALL_INSTANCE(INSTANCE) ((INSTANCE) == ETH)
 
+/****************************** SDIO Instances ********************************/
+#define IS_SDIO_ALL_INSTANCE(INSTANCE) ((INSTANCE) == SDIO)
+
 #define RCC_HSE_MIN         3000000U
 #define RCC_HSE_MAX        25000000U
 
@@ -7778,11 +7798,11 @@ unlock the write access to the option byte block */
   * @}
   */
 /******************************************************************************/
-/*  For a painless codes migration between the STM32F1xx device product       */
+/*  For a painless codes migration between the PY32F403xx device product      */
 /*  lines, the aliases defined below are put in place to overcome the         */
 /*  differences in the interrupt handlers and IRQn definitions.               */
 /*  No need to update developed interrupt code when moving across             */
-/*  product lines within the same STM32F1 Family                              */
+/*  product lines within the same PY32F403 Family                             */
 /******************************************************************************/
 
 /* Aliases for __IRQn */

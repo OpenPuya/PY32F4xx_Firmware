@@ -843,16 +843,19 @@ void usbd_event_ep0_setup_complete_handler(uint8_t *psetup)
         usbd_core_cfg.ep0_data_buf = usbd_core_cfg.req_data;
     }
 #endif
-    /* Send data or status to host */
-    usbd_ep_start_write(USB_CONTROL_IN_EP0, usbd_core_cfg.ep0_data_buf, usbd_core_cfg.ep0_data_buf_residue);
+    
     /*
     * Set ZLP flag when host asks for a bigger length and the data size is multiplier of USB_CTRL_EP_MPS,
     * to indicate the transfer done after zlp sent.
     */
     if ((setup->wLength > usbd_core_cfg.ep0_data_buf_len) && (!(usbd_core_cfg.ep0_data_buf_len % USB_CTRL_EP_MPS))) {
         usbd_core_cfg.zlp_flag = true;
+        usbd_ep0_set_zlp_flag();
         USB_LOG_DBG("EP0 Set zlp\r\n");
     }
+
+    /* Send data or status to host */
+    usbd_ep_start_write(USB_CONTROL_IN_EP0, usbd_core_cfg.ep0_data_buf, usbd_core_cfg.ep0_data_buf_residue);
 }
 
 void usbd_event_ep_in_complete_handler(uint8_t ep, uint32_t nbytes)

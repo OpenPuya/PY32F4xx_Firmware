@@ -154,7 +154,7 @@ void SysTick_Handler(void)
   * @param  hctc:pointer to a CTC_HandleTypeDef structure.
   * @retval None
   */
-void RCC_CTC_IRQHandler(CTC_HandleTypeDef *hctc)
+void RCC_CTC_IRQHandler(void)
 {
   HAL_CTC_IRQHandler(&CTChadle);
 }

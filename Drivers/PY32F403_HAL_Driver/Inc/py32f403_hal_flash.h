@@ -530,7 +530,8 @@ HAL_StatusTypeDef  FLASH_WaitForLastOperation(uint32_t Timeout);
                                                         ((__LATENCY__) == FLASH_LATENCY_1) || \
                                                         ((__LATENCY__) == FLASH_LATENCY_3) || \
                                                         ((__LATENCY__) == FLASH_LATENCY_4) || \
-                                                        ((__LATENCY__) == FLASH_LATENCY_5))
+                                                        ((__LATENCY__) == FLASH_LATENCY_5) || \
+                                                        ((__LATENCY__) == FLASH_LATENCY_6))
 
 #define IS_WRPSTATE(__VALUE__)                         (((__VALUE__) == OB_WRPSTATE_DISABLE) || \
                                                         ((__VALUE__) == OB_WRPSTATE_ENABLE))

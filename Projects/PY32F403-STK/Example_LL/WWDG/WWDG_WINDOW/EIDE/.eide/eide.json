@@ -1,0 +1,156 @@
+{
+  "name": "Project",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "BSP",
+        "files": [
+          {
+            "path": "../../../../../../Drivers/BSP/PY32F403xx_Start_Kit/py32f403xx_ll_Start_Kit.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Common",
+        "files": [
+          {
+            "path": "../Src/system_py32f403.c"
+          },
+          {
+            "path": "startup_py32f403xx.s"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "Doc",
+        "files": [
+          {
+            "path": "../readme.txt"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "PY32F403_HAL_Driver",
+        "files":[
+          {
+            "path":"../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_ll_utils.c"
+          },
+          {                
+            "path":"../../../../../../Drivers/PY32F403_HAL_Driver/Src/py32f403_ll_rcc.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "User",
+        "files":[
+          {
+            "path":"../Src/main.c"
+          },
+          {
+            "path":"../Src/py32f403_it.c"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": "PY32F403xD",
+  "packDir": "../../../../../../Pack/GCC/.pack/Puya/PY32F4xx_DFP",
+  "miscInfo": {
+    "uid": "36bcf0031e18a3008bbdaa90a96a7987"
+  },
+  "targets": {
+    "Project": {
+      "excludeList": [],
+      "toolchain": "GCC",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "floatingPointHardware": "single",
+        "scatterFilePath": "py32f403xd.ld",
+        "useCustomScatterFile": true,
+        "storageLayout": {
+          "RAM": [],
+          "ROM": []
+        },
+        "options": "null"
+      },
+      "uploader": "OpenOCD",
+      "uploadConfig": {
+        "bin": "",
+        "target": "py32f403",
+        "interface": "cmsis-dap",
+        "baseAddr": "0x08000000"
+      },
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "Puya",
+            "cpuName": "PY32F403xD"
+          },
+          "proType": 1,
+          "speed": 1000,
+          "otherCmds": ""
+        },
+        "OpenOCD": {
+          "bin": "",
+          "target": "py32f403",
+          "interface": "cmsis-dap",
+          "baseAddr": "0x08000000"
+        }
+      },
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          ".",
+          "../../../../../../Drivers/BSP/PY32F403xx_Start_Kit",
+          "../../../../../../Drivers/CMSIS/Device/PUYA/PY32F403/Include",
+          "../../../../../../Drivers/CMSIS/Include",
+          "../../../../../../Drivers/PY32F403_HAL_Driver/Inc",
+          "../Inc"
+        ],
+        "libList": [],
+        "defineList": ["PY32F403xD","USE_FULL_LL_DRIVER"]
+      },
+      "builderOptions": {
+        "GCC": {
+          "version": 5,
+          "beforeBuildTasks": [],
+          "afterBuildTasks": [],
+          "global": {
+            "$float-abi-type": "hard",
+            "output-debug-info": "enable",
+            "misc-control": "--specs=nosys.specs --specs=nano.specs -mfloat-abi=hard -mfpu=vfpv4-d16"
+          },
+          "c/cpp-compiler": {
+            "language-c": "c11",
+            "language-cpp": "c++11",
+            "optimization": "level-debug",
+            "warnings": "all-warnings",
+            "one-elf-section-per-function": true,
+            "one-elf-section-per-data": true
+          },
+          "asm-compiler": {},
+          "linker": {
+            "output-format": "elf",
+            "remove-unused-input-sections": true,
+            "LIB_FLAGS": "-lm",
+            "$toolName": "auto"
+          }
+        }
+      }
+    }
+  },
+  "version": "3.5"
+}

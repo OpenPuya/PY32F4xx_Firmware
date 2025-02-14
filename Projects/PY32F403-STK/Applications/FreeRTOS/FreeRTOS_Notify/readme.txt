@@ -77,6 +77,7 @@ STK板        USB转TTL模块
 PA02(TX) --> RX
 PA03(RX) --> TX
 GND      --> GND
+波特率: 115200bps
 
 Notes:
 The STK board is wired to the USB to TTL module as follows:
@@ -84,5 +85,5 @@ STK board    USB to TTL module
 PA02(TX) --> RX
 PA03(RX) --> TX
 GND      --> GND
-
+Baud rate: 115200bps
 ================================================================================

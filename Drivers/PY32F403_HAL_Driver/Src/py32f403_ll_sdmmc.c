@@ -250,8 +250,8 @@ HAL_StatusTypeDef SDIO_Init(SDIO_TypeDef *SDIOx, SDIO_InitTypeDef Init)
   /* Write to SDMMC CLKCR */
   MODIFY_REG(SDIOx->CLKCR, CLKCR_CLEAR_MASK, tmpreg);  
 
-	SDIO_SetClock(SDIOx, Init.ClockDiv);
-			
+  SDIO_SetClock(SDIOx, Init.ClockDiv);
+      
   return HAL_OK;
 }
 
@@ -459,8 +459,6 @@ HAL_StatusTypeDef SDIO_SendCommand(SDIO_TypeDef *SDIOx, SDIO_CmdInitTypeDef *Com
   /* Write to SDMMC CMD register */
   MODIFY_REG(SDIOx->CMD, CMD_CLEAR_MASK, tmpreg); 
   
-//	SDIOx->CMD |= Command->CPSM;
-	
   return HAL_OK;  
 }
 
@@ -527,21 +525,11 @@ HAL_StatusTypeDef SDIO_ConfigData(SDIO_TypeDef *SDIOx, SDIO_DataInitTypeDef* Dat
 
   /* Set the SDMMC data configuration parameters */
   MODIFY_REG(SDIOx->CMD, (SDIO_CMD_DTMODE_Msk | SDIO_CMD_DIR_Msk), \
-	                       (Data->TransferDir | Data->TransferMode));
+                         (Data->TransferDir | Data->TransferMode));
 
   return HAL_OK;
 
 }
-
-///**
-//  * @brief  Returns number of remaining data bytes to be transferred.
-//  * @param  SDIOx: Pointer to SDIO register base
-//  * @retval Number of remaining data bytes to be transferred
-//  */
-//uint32_t SDIO_GetDataCounter(SDIO_TypeDef *SDIOx)
-//{
-//  return (SDIOx->DCOUNT);
-//}
 
 /**
   * @brief  Get the FIFO data
@@ -1555,7 +1543,7 @@ static uint32_t SDMMC_GetCmdResp3(SDIO_TypeDef *SDIOx)
     /* Clear all the static flags */
     __SDIO_CLEAR_FLAG(SDIOx, SDIO_STATIC_CMD_FLAGS);
   }
-	
+  
   return SDMMC_ERROR_NONE;
 }
 

@@ -1,7 +1,8 @@
 /******************************************************************************
- * @file     system_py32f403.c
- * @brief    CMSIS Cortex-M4 Device Peripheral Access Layer Source File for
- *           Device 
+  * @file    py32f403_hal_def.h
+  * @author  MCU Application Team
+  * @brief   This file contains HAL common defines, enumeration, macros and
+  *          structures definitions.
  ******************************************************************************
   * @attention
   *

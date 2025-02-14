@@ -70,14 +70,14 @@ typedef struct
   uint32_t ClockPowerSave;       /*!< Specifies whether SDMMC Clock output is enabled or
                                       disabled when the bus is idle.
                                       This parameter can be a value of @ref SDIO_LL_Clock_Power_Save           */ 
-	
+  
   uint32_t PreSampling;          /*!< Specifies whether SDMMC controller preSampling Clock 
-	                                    is enabled or disabled.
+                                      is enabled or disabled.
                                       This parameter can be a value of @ref SDIO_LL_PreSampling               */
 
   uint32_t PreSamplingClockSel;  /*!< Specifies the SDMMC preSampling Clock select.
                                       This parameter can be a value of @ref SDIO_LL_PreSampling_Clock_Select               */
-																			
+                                      
 }SDIO_InitTypeDef;
   
 
@@ -98,7 +98,7 @@ typedef struct
                                      This parameter can be a value of @ref SDIO_LL_Response_Type         */
 
   uint32_t WaitPend;            /*!< Specifies whether to wait for the data transfer to before 
-	                                   sending the command, request is enabled or disabled.
+                                     sending the command, request is enabled or disabled.
                                      This parameter can be a value of @ref SDIO_LL_Wait_Pend  */
     
   uint32_t AutoInit;            /*!< Specifies whether Send initialization sequence before sending command.
@@ -113,7 +113,7 @@ typedef struct
   uint32_t CPSM;                /*!< Specifies whether SDMMC Command path state machine (CPSM)
                                      is enabled or disabled.
                                      This parameter can be a value of @ref SDIO_LL_CPSM_State            */
-	
+  
 }SDIO_CmdInitTypeDef;
 
 
@@ -545,7 +545,7 @@ typedef struct
 /** @defgroup SDIO_LL_Data_Block_Size  Data Block Size
   * @{
   */
-	#define IS_SDIO_BLOCK_SIZE(SIZE) ((SIZE) < 0x00010000U) 
+  #define IS_SDIO_BLOCK_SIZE(SIZE) ((SIZE) < 0x00010000U) 
 /**
   * @}
   */
@@ -553,7 +553,7 @@ typedef struct
 /** @defgroup SDIO_LL_TIMEOUT  Data Block Size
   * @{
   */
-	#define IS_SDIO_TIME_OUT(TIME) ((TIME) < 0x01000000U) 
+  #define IS_SDIO_TIME_OUT(TIME) ((TIME) < 0x01000000U) 
 /**
   * @}
   */
@@ -590,6 +590,15 @@ typedef struct
 
 #define IS_SDIO_DPSM(DPSM)                   (((DPSM) == SDIO_DPSM_DISABLE) ||\
                                               ((DPSM) == SDIO_DPSM_ENABLE))
+/**
+  * @}
+  */
+
+/** @defgroup SDIO_LL_FIFO_Threshold FIFO Threshold
+  * @{
+  */
+#define IS_FIFO_THRESHOLD(RX_THRESHOLD, TX_THRESHOLD) (((RX_THRESHOLD) <= 16U) &&\
+                                                       ((TX_THRESHOLD) <= 16U))
 /**
   * @}
   */
@@ -642,15 +651,15 @@ typedef struct
                                                         SDIO_FLAG_TXDR | SDIO_FLAG_RXDR | SDIO_FLAG_RCRC | SDIO_FLAG_DCRC |\
                                                         SDIO_FLAG_RTO_BAR  | SDIO_FLAG_DRTO_BDS | SDIO_FLAG_HTO |\
                                                         SDIO_FLAG_FRUN |SDIO_FLAG_HLE | SDIO_FLAG_SBE | SDIO_FLAG_ACD |\
-																												SDIO_FLAG_EBE | SDIO_FLAG_SDIOINT))  
+                                                        SDIO_FLAG_EBE | SDIO_FLAG_SDIOINT))  
 
 #define SDIO_STATIC_CMD_FLAGS               ((uint32_t)(SDIO_FLAG_CAD | SDIO_FLAG_RE | SDIO_FLAG_CD |\
                                                         SDIO_FLAG_RCRC | SDIO_FLAG_RTO_BAR | SDIO_FLAG_HTO |\
-																												SDIO_FLAG_HLE | SDIO_FLAG_SBE | SDIO_FLAG_ACD))
+                                                        SDIO_FLAG_HLE | SDIO_FLAG_SBE | SDIO_FLAG_ACD))
 
 #define SDIO_STATIC_DATA_FLAGS              ((uint32_t)(SDIO_FLAG_DTO | SDIO_FLAG_TXDR | SDIO_FLAG_DCRC |\
                                                         SDIO_FLAG_DRTO_BDS | SDIO_FLAG_HTO | SDIO_FLAG_FRUN |\
-																											  SDIO_FLAG_HLE | SDIO_FLAG_SBE | SDIO_FLAG_EBE))
+                                                        SDIO_FLAG_HLE | SDIO_FLAG_SBE | SDIO_FLAG_EBE))
 /**
   * @}
   */
@@ -679,9 +688,9 @@ typedef struct
 /* CMD Register clear mask */
 #define CMD_CLEAR_MASK           ((uint32_t)(SDIO_CMD_CMDINDEX_Msk | SDIO_CMD_WAITRESP_Msk |\
                                              SDIO_CMD_RESPLEN_Msk  | SDIO_CMD_CHECKRESPCRC_Msk |\
-																						 SDIO_CMD_DEXPECT_Msk  | SDIO_CMD_WAITPEND_Msk |\
+                                             SDIO_CMD_DEXPECT_Msk  | SDIO_CMD_WAITPEND_Msk |\
                                              SDIO_CMD_STARTCMD_Msk | SDIO_CMD_AUTOINIT_Msk |\
-																						 SDIO_CMD_REGSYNC_Msk))
+                                             SDIO_CMD_REGSYNC_Msk))
 
 /* SDIO Initialization Frequency (400KHz max) */
 #define SDIO_INIT_CLK_DIV     (SystemCoreClock/(400000<<1))   /* SystemCoreClock / (SDMMC_INIT_CLK_DIV * 2) < 400KHz */
@@ -766,20 +775,6 @@ typedef struct
   * @retval None
   */
 #define __SDIO_IS_FIFO_FULL(__INSTANCE__)  (((__INSTANCE__)->STATUS & SDIO_STATUS_FIFOF) == SDIO_STATUS_FIFOF)
-
-///**
-//  * @brief  Whether the recieved data reached the watermark.
-//  * @param  __INSTANCE__: SDIO Instance   
-//  * @retval None
-//  */
-//#define __SDIO_IS_RX_WATERMARK(__INSTANCE__)  (((__INSTANCE__)->STATUS & SDIO_STATUS_RXWMARK) == SDIO_STATUS_RXWMARK)
-
-///**
-//  * @brief  Whether the transferred data reached the watermark.
-//  * @param  __INSTANCE__: SDIO Instance   
-//  * @retval None
-//  */
-//#define __SDIO_IS_TX_WATERMARK(__INSTANCE__)  (((__INSTANCE__)->STATUS & SDIO_STATUS_TXWMARK) == SDIO_STATUS_TXWMARK)
 
 /**
   * @brief  Enable SDIO global interrupt.

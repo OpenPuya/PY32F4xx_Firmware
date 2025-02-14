@@ -381,8 +381,8 @@ HAL_StatusTypeDef HAL_SD_Init(SD_HandleTypeDef *hsd)
     return HAL_ERROR;
   }
 
-	SDIO_SetFifoThreshold(hsd->Instance, RX_FIFO_DEPTH, TX_FIFO_DEPTH);
-	
+  SDIO_SetFifoThreshold(hsd->Instance, RX_FIFO_DEPTH, TX_FIFO_DEPTH);
+  
   /* Initialize the error code */
   hsd->ErrorCode = HAL_SD_ERROR_NONE;
 
@@ -407,7 +407,7 @@ HAL_StatusTypeDef HAL_SD_InitCard(SD_HandleTypeDef *hsd)
   uint32_t errorstate;
   HAL_StatusTypeDef status;
   SD_InitTypeDef Init;
-  	
+    
   /* Default SDIO peripheral configuration for SD card initialization */
   Init.ClockSel            = SDIO_CLOCK_OFFSET_180C;
   Init.ClockDiv            = SDIO_INIT_CLK_DIV;
@@ -425,10 +425,10 @@ HAL_StatusTypeDef HAL_SD_InitCard(SD_HandleTypeDef *hsd)
 
   /* Set Power State to ON */
   (void)SDIO_PowerState_ON(hsd->Instance);
-	
-	/* Disable CMD pullup */
+  
+  /* Disable CMD pullup */
   __HAL_SD_OD_PULLUP_DISABLE(hsd);
-	
+  
   /* Identify card operating voltage */
   errorstate = SD_PowerON(hsd);
   if(errorstate != HAL_SD_ERROR_NONE)
@@ -579,9 +579,6 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint3
 
     hsd->State = HAL_SD_STATE_BUSY;
 
-    /* Initialize data control register */
-//    hsd->Instance->DCTRL = 0U;
-
     if(hsd->SdCard.CardType != CARD_SDHC_SDXC)
     {
       add *= 512U;
@@ -610,18 +607,18 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint3
     if(NumberOfBlocks > 1U)
     {
       hsd->Context = SD_CONTEXT_READ_MULTIPLE_BLOCK;
-			
-			/* Enable the SDIO auto send stop command */
+      
+      /* Enable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_ENABLE(hsd->Instance);
-			
+      
       /* Read Multi Block command */
       errorstate = SDMMC_CmdReadMultiBlock(hsd->Instance, add);
     }
     else
     {
       hsd->Context = SD_CONTEXT_READ_SINGLE_BLOCK;
-			
-			/* Disable the SDIO auto send stop command */
+      
+      /* Disable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_DISABLE(hsd->Instance);
 
       /* Read Single Block command */
@@ -660,7 +657,7 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint3
           tempbuff++;
           dataremaining--;
         }
-		    __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
+        __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
       }
 
       if(((HAL_GetTick()-tickstart) >=  Timeout) || (Timeout == 0U))
@@ -788,9 +785,6 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint
 
     hsd->State = HAL_SD_STATE_BUSY;
 
-//    /* Initialize data control register */
-//    hsd->Instance->DCTRL = 0U;
-
     if(hsd->SdCard.CardType != CARD_SDHC_SDXC)
     {
       add *= 512U;
@@ -819,8 +813,8 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint
     if(NumberOfBlocks > 1U)
     {
       hsd->Context = SD_CONTEXT_WRITE_MULTIPLE_BLOCK;
-			
-			/* Enable the SDIO auto send stop command */
+      
+      /* Enable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_ENABLE(hsd->Instance);
 
       /* Write Multi Block command */
@@ -829,8 +823,8 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint
     else
     {
       hsd->Context = SD_CONTEXT_WRITE_SINGLE_BLOCK;
-			
-			/* Disable the SDIO auto send stop command */
+      
+      /* Disable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_DISABLE(hsd->Instance);
 
       /* Write Single Block command */
@@ -869,7 +863,7 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks(SD_HandleTypeDef *hsd, uint8_t *pData, uint
           dataremaining--;
           (void)SDIO_WriteFIFO(hsd->Instance, &data);
         }
-		    __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_TXDR);
+        __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_TXDR);
       }
 
       if(((HAL_GetTick()-tickstart) >=  Timeout) || (Timeout == 0U))
@@ -990,8 +984,8 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks_IT(SD_HandleTypeDef *hsd, uint8_t *pData, ui
     if(NumberOfBlocks > 1U)
     {
       hsd->Context = (SD_CONTEXT_READ_MULTIPLE_BLOCK | SD_CONTEXT_IT);
-			
-			/* Enable the SDIO auto send stop command */
+      
+      /* Enable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_ENABLE(hsd->Instance);
 
       /* Read Multi Block command */
@@ -1000,8 +994,8 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks_IT(SD_HandleTypeDef *hsd, uint8_t *pData, ui
     else
     {
       hsd->Context = (SD_CONTEXT_READ_SINGLE_BLOCK | SD_CONTEXT_IT);
-			
-			/* Disable the SDIO auto send stop command */
+      
+      /* Disable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_DISABLE(hsd->Instance);
 
       /* Read Single Block command */
@@ -1093,8 +1087,8 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks_IT(SD_HandleTypeDef *hsd, uint8_t *pData, u
     if(NumberOfBlocks > 1U)
     {
       hsd->Context = (SD_CONTEXT_WRITE_MULTIPLE_BLOCK| SD_CONTEXT_IT);
-			
-			/* Enable the SDIO auto send stop command */
+      
+      /* Enable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_ENABLE(hsd->Instance);
 
       /* Write Multi Block command */
@@ -1103,8 +1097,8 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks_IT(SD_HandleTypeDef *hsd, uint8_t *pData, u
     else
     {
       hsd->Context = (SD_CONTEXT_WRITE_SINGLE_BLOCK | SD_CONTEXT_IT);
-			
-			/* Disable the SDIO auto send stop command */
+      
+      /* Disable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_DISABLE(hsd->Instance);
 
       /* Write Single Block command */
@@ -1221,8 +1215,8 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint8_t *pData, u
       if(NumberOfBlocks > 1U)
       {
         hsd->Context = (SD_CONTEXT_READ_MULTIPLE_BLOCK | SD_CONTEXT_DMA);
-			
-			  /* Enable the SDIO auto send stop command */
+      
+        /* Enable the SDIO auto send stop command */
         __SDIO_AUTO_STOP_CMD_ENABLE(hsd->Instance);
 
         /* Read Multi Block command */
@@ -1231,8 +1225,8 @@ HAL_StatusTypeDef HAL_SD_ReadBlocks_DMA(SD_HandleTypeDef *hsd, uint8_t *pData, u
       else
       {
         hsd->Context = (SD_CONTEXT_READ_SINGLE_BLOCK | SD_CONTEXT_DMA);
-			
-			  /* Disable the SDIO auto send stop command */
+      
+        /* Disable the SDIO auto send stop command */
         __SDIO_AUTO_STOP_CMD_DISABLE(hsd->Instance);
 
         /* Read Single Block command */
@@ -1321,7 +1315,7 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint8_t *pData, 
       hsd->State = HAL_SD_STATE_READY;
       return HAL_ERROR;
     }
-		
+    
     /* Configure the SD DPSM (Data Path State Machine) */
     config.DataTimeOut   = SDMMC_DATATIMEOUT;
     config.DataLength    = BLOCKSIZE * NumberOfBlocks;
@@ -1329,7 +1323,7 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint8_t *pData, 
     config.TransferDir   = SDIO_TRANSFER_DIR_TO_CARD;
     config.TransferMode  = SDIO_TRANSFER_MODE_BLOCK;
     (void)SDIO_ConfigData(hsd->Instance, &config);
-		
+    
     /* Enable SDIO DMA transfer */
     __HAL_SD_DMA_ENABLE(hsd);
 
@@ -1337,8 +1331,8 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint8_t *pData, 
     if(NumberOfBlocks > 1U)
     {
       hsd->Context = (SD_CONTEXT_WRITE_MULTIPLE_BLOCK | SD_CONTEXT_DMA);
-			
-			/* Enable the SDIO auto send stop command */
+      
+      /* Enable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_ENABLE(hsd->Instance);
 
       /* Write Multi Block command */
@@ -1347,8 +1341,8 @@ HAL_StatusTypeDef HAL_SD_WriteBlocks_DMA(SD_HandleTypeDef *hsd, uint8_t *pData, 
     else
     {
       hsd->Context = (SD_CONTEXT_WRITE_SINGLE_BLOCK | SD_CONTEXT_DMA);
-			
-	    /* Disable the SDIO auto send stop command */
+      
+      /* Disable the SDIO auto send stop command */
       __SDIO_AUTO_STOP_CMD_DISABLE(hsd->Instance);
 
       /* Write Single Block command */
@@ -1497,14 +1491,13 @@ HAL_StatusTypeDef HAL_SD_Erase(SD_HandleTypeDef *hsd, uint32_t BlockStartAdd, ui
 void HAL_SD_IRQHandler(SD_HandleTypeDef *hsd)
 {
   uint32_t data;
-//  uint32_t errorstate;
   uint32_t context = hsd->Context;
 
   /* Check for SDIO interrupt flags */
   if((__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_RXDR) != RESET) && ((context & SD_CONTEXT_IT) != 0U))
   {
     SD_Read_IT(hsd);
-		__HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
+    __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
   }
 
   else if(__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_DTO) != RESET)
@@ -1517,20 +1510,6 @@ void HAL_SD_IRQHandler(SD_HandleTypeDef *hsd)
     
     if((context & SD_CONTEXT_IT) != 0U)
     {
-//      if(((context & SD_CONTEXT_READ_MULTIPLE_BLOCK) != 0U) || ((context & SD_CONTEXT_WRITE_MULTIPLE_BLOCK) != 0U))
-//      {
-//        errorstate = SDMMC_CmdStopTransfer(hsd->Instance);
-//        if(errorstate != HAL_SD_ERROR_NONE)
-//        {
-//          hsd->ErrorCode |= errorstate;
-//#if defined (USE_HAL_SD_REGISTER_CALLBACKS) && (USE_HAL_SD_REGISTER_CALLBACKS == 1U)
-//          hsd->ErrorCallback(hsd);
-//#else
-//          HAL_SD_ErrorCallback(hsd);
-//#endif /* USE_HAL_SD_REGISTER_CALLBACKS */
-//        }
-//      }
-
       /* Clear all the static flags */
       __HAL_SD_CLEAR_FLAG(hsd, SDIO_STATIC_DATA_FLAGS);
 
@@ -1571,19 +1550,6 @@ void HAL_SD_IRQHandler(SD_HandleTypeDef *hsd)
     }
     else if((context & SD_CONTEXT_DMA) != 0U)
     {
-//      if((context & SD_CONTEXT_WRITE_MULTIPLE_BLOCK) != 0U)
-//      {
-//        errorstate = SDMMC_CmdStopTransfer(hsd->Instance);
-//        if(errorstate != HAL_SD_ERROR_NONE)
-//        {
-//          hsd->ErrorCode |= errorstate;
-//#if defined (USE_HAL_SD_REGISTER_CALLBACKS) && (USE_HAL_SD_REGISTER_CALLBACKS == 1U)
-//          hsd->ErrorCallback(hsd);
-//#else
-//          HAL_SD_ErrorCallback(hsd);
-//#endif /* USE_HAL_SD_REGISTER_CALLBACKS */
-//        }
-//      }
       if(((context & SD_CONTEXT_WRITE_MULTIPLE_BLOCK) == 0U) && ((context & SD_CONTEXT_WRITE_SINGLE_BLOCK) == 0U))
       {
         /* Disable the DMA transfer for transmit request by setting the DMAEN bit
@@ -1623,7 +1589,7 @@ void HAL_SD_IRQHandler(SD_HandleTypeDef *hsd)
   else if((__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_TXDR) != RESET) && ((context & SD_CONTEXT_IT) != 0U))
   {
     SD_Write_IT(hsd);
-		__HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_TXDR);
+    __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_TXDR);
   }
 
   else if(__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_DCRC | SDIO_FLAG_DRTO_BDS | SDIO_FLAG_RTO_BAR | SDIO_FLAG_FRUN | SDIO_FLAG_SBE) != RESET)
@@ -2710,7 +2676,7 @@ static uint32_t SD_PowerON(SD_HandleTypeDef *hsd)
 
   /* CMD8: SEND_IF_COND: Command available only on V2.0 cards */
   errorstate = SDMMC_CmdOperCond(hsd->Instance);
-	if(errorstate != HAL_SD_ERROR_NONE)
+  if(errorstate != HAL_SD_ERROR_NONE)
   {
     hsd->SdCard.CardVersion = CARD_V1_X;
       
@@ -2787,7 +2753,7 @@ static uint32_t SD_PowerON(SD_HandleTypeDef *hsd)
       hsd->SdCard.CardType = CARD_SDSC;
     }
   }
-	
+  
   return HAL_SD_ERROR_NONE;
 }
 
@@ -2865,7 +2831,7 @@ static uint32_t SD_SendSDStatus(SD_HandleTypeDef *hsd, uint32_t *pSDstatus)
         *pData = SDIO_ReadFIFO(hsd->Instance);
         pData++;
       }
-		  __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
+      __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
     }
 
     if((HAL_GetTick() - tickstart) >=  SDMMC_DATATIMEOUT)
@@ -3081,8 +3047,8 @@ static uint32_t SD_FindSCR(SD_HandleTypeDef *hsd, uint32_t *pSCR)
     {
       *(tempscr + index) = SDIO_ReadFIFO(hsd->Instance);
       index++;
-			
-	    __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
+      
+      __HAL_SD_CLEAR_FLAG(hsd, SDIO_FLAG_RXDR);
     }
 
     if((HAL_GetTick() - tickstart) >=  SDMMC_DATATIMEOUT)
@@ -3090,11 +3056,11 @@ static uint32_t SD_FindSCR(SD_HandleTypeDef *hsd, uint32_t *pSCR)
       return HAL_SD_ERROR_TIMEOUT;
     }
   }
-	while (!__HAL_SD_IS_FIFO_EMPTY(hsd))
-	{
-	  *(tempscr + index) = SDIO_ReadFIFO(hsd->Instance);
+  while (!__HAL_SD_IS_FIFO_EMPTY(hsd))
+  {
+    *(tempscr + index) = SDIO_ReadFIFO(hsd->Instance);
     index++;
-	}
+  }
 
   if(__HAL_SD_GET_FLAG(hsd, SDIO_FLAG_DRTO_BDS))
   {

@@ -73,6 +73,9 @@ int main(void)
   
   /* Disable SYSTICK interrupt to prevent SYSTICK from waking up */
   HAL_SuspendTick();
+
+  /* Low power STOP voltage 0.8V */
+  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE4);
   
   /* Enter STOP mode */
   HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON,PWR_STOPENTRY_WFE);
